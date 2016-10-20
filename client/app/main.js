@@ -1,11 +1,12 @@
 'use strict'
 
-angular.module('project-manager', ['ngRoute'])
-    .config($routeProvider => 
-        $routeProvider
-            .when('/', {
-                controller: 'controllers/MainCtrl',
-                template: 'partials/main.html'
-            })
-    )
-            
+var app = angular.module('project-manager', ['ngRoute'])
+
+app.config($routeProvider => 
+    $routeProvider
+        .when('/', {
+            templateUrl: '/partials/main.html',
+            controller: 'MainCtrl'      
+        })
+)
+        
