@@ -1,0 +1,24 @@
+{
+  "name": "project-manager-capstone",
+  "version": "1.0.0",
+  "description": "This is my final project for NSS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmphilips/project-manager-capstone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmphilips/project-manager-capstone/issues"
+  },
+  "homepage": "https://github.com/jmphilips/project-manager-capstone#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.14.0"
+  }
+}
