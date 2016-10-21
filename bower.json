@@ -1,0 +1,23 @@
+{
+  "name": "project-manager-capstone",
+  "description": "This is my final project for NSS.",
+  "main": "index.js",
+  "authors": [
+    "Joshua Philips <jmichaelphilips@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jmphilips/project-manager-capstone",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.8",
+    "angular-ui-calendar": "^1.0.2",
+    "angular": "^1.5.8"
+  }
+}

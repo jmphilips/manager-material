@@ -40,6 +40,7 @@ function getProjects (req, res) {
         });
 };
 
+
 // POSTS a new project to MONGO
 app.post('/api/create-project', createProject);
 function createProject (req, res) {
