@@ -21,12 +21,18 @@ app.get('/api/title', (req, res) => {
     res.send({title: 'Welcome'});
 });
 
+app.get('/api/get-projects', getProjects)
 
+function getProjects (req, res) {
+    Project.find()
+        .then(projects => {
+            res.status(200).json(projects);
+        })
+};
 
 
 
 app.post('/api/create-project', createProject)
-
 function createProject (req, res) {
     const proj = req.body
 
@@ -38,14 +44,14 @@ function createProject (req, res) {
 
 
 app.post('/api/create-employee', createEmployee)
-
 function createEmployee (req, res) {
     const emp = req.body
-        Employee.create(emp)
-            .then(emp => {
-                console.log(emp)
-                res.status(200).json(emp)
-            });
+
+    Employee.create(emp)
+        .then(emp => {
+            console.log(emp)
+            res.status(200).json(emp)
+    })
 };
 
 
