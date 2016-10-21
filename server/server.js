@@ -7,7 +7,6 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
 
-
 const app = express();
 app.use(express.static('client'));
 app.use(json())
@@ -75,7 +74,7 @@ function createEmployee (req, res) {
     })
 };
 
-// The Manager API calls 
+// The Manager API  
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager) 
 function createManager(req, res) {
@@ -100,6 +99,8 @@ app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
             }
         })
 })
+
+
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URL, () => {
