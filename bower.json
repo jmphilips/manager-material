@@ -19,5 +19,8 @@
     "angular-route": "^1.5.8",
     "angular-ui-calendar": "^1.0.2",
     "angular": "^1.5.8"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }
