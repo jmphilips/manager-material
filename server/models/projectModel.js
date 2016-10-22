@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model("Project", {
-    name: String, 
+    title: String, 
     description: String,
     Employees: [String], 
     startDate: Date,

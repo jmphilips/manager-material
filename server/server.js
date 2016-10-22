@@ -56,6 +56,7 @@ function createProject (req, res) {
 // The Employee API  
 // GETS all of the employees from MONGO
 app.get('/api/get-employees', getEmployees);
+
 function getEmployees (req, res) {
     Employee.find()
         .then(employees => {
@@ -65,6 +66,7 @@ function getEmployees (req, res) {
 
 // POSTS a new employee to MONGO.
 app.post('/api/create-employee', createEmployee);
+
 function createEmployee (req, res) {
     const emp = req.body
 
@@ -77,7 +79,8 @@ function createEmployee (req, res) {
 
 // The Manager API  
 // Creates a new manager in MONGO
-app.post('/api/create-manager', createManager) 
+app.post('/api/create-manager', createManager); 
+
 function createManager(req, res) {
     const manager = req.body
 
