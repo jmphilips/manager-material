@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
 
@@ -8,4 +8,4 @@ module.exports = mongoose.model("Project", {
     Employees: [String], 
     startDate: Date,
     endDate: Date
-});
+})
