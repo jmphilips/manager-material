@@ -7,7 +7,7 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
 
-const Project = require('./models/ProjectModel.js');
+const Project = require('./models/ProjectModels.js');
 const Employee = require('./models/EmployeeModel.js');
 const Manager = require('./models/ManagerModel.js');
 
