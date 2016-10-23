@@ -1,7 +1,7 @@
 {
   "name": "project-manager-capstone",
   "description": "This is my final project for NSS.",
-  "main": "index.js",
+  "main": "server/server.js",
   "authors": [
     "Joshua Philips <jmichaelphilips@gmail.com>"
   ],
