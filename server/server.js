@@ -7,6 +7,10 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
 
+const Project = require('./models/ProjectModel.js');
+const Employee = require('./models/EmployeeModel.js');
+const Manager = require('./models/ManagerModel.js');
+
 const app = express();
 app.use(express.static('client'));
 app.use(json())
@@ -19,10 +23,6 @@ app.use(session({
 
 const PORT = process.env.port || 3000;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/project-employee';
-
-const Project = require('./models/ProjectModel.js');
-const Employee = require('./models/EmployeeModel.js');
-const Manager = require('./models/ManagerModel.js');
 
 app.get('/api/title', (req, res) => {
     res.send({title: 'Welcome'});
