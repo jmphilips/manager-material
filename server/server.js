@@ -24,7 +24,7 @@ app.use(session({
     secret: 'thesecretkey'
 }));
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/project-employee';
 
 app.get('/api/title', (req, res) => {
