@@ -8,5 +8,6 @@ module.exports = mongoose.model("Project", {
     employees: [String], 
     start: String,
     end: String, 
-    url: String
+    url: String, 
+    stick: { type: Boolean, default: true },
 })
