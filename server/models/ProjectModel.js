@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 module.exports = mongoose.model("Project", {
     title: String, 
     description: String,
-    Employees: [String], 
+    employees: [String], 
     startDate: Date,
-    endDate: Date
+    endDate: Date, 
+    url: String,
 })

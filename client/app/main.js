@@ -8,5 +8,9 @@ app.config($routeProvider =>
             templateUrl: '/partials/main.html',
             controller: 'MainCtrl'      
         })
-)
+        .when('/test', {
+            templateUrl: '/partials/test.html',
+            controller: 'TestCtrl'
+        })
+);
         
