@@ -55,6 +55,7 @@ function createProject (req, res) {
         });
 };
 
+// Updates the project object
 app.put('/api/projects/:projectId', (req, res, err) => {
     const projectInformation = req.body;
     const projectId = req.params.projectId
@@ -93,7 +94,6 @@ function createEmployee (req, res) {
 // The Manager API  
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager); 
-
 function createManager(req, res) {
     const manager = req.body
 

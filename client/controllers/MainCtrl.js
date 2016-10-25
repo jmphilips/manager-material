@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('MainCtrl', function($scope, $http, uiCalendarConfig, DateFactory){
+app.controller('MainCtrl', function($scope, $http, uiCalendarConfig, DateFactory, $compile){
      
     var date = new Date();
     var d = date.getDate();

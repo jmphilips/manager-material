@@ -13,6 +13,7 @@ module.exports = mongoose.model("Project", {
     end: String, 
     url: String, 
     stick: { type: Boolean, default: true },
+    technologies: [String]
 })
 
 
