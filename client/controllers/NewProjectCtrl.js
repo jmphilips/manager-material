@@ -8,7 +8,7 @@ app.controller('NewProjectCtrl', function($scope, $http, $location){
             title: $scope.title,
         };
 
-        $http.post('/api/create-project', project)
+        $http.post('/api/projects', project)
         .then(({data}) => {
             $location.path('/edit-project/' + data._id)
         })

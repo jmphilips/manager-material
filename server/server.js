@@ -35,7 +35,7 @@ app.get('/api/title', (req, res) => {
 
 // The Project API 
 // GETS all of the projects from MONGO
-app.get('/api/get-projects', getProjects);
+app.get('/api/projects', getProjects);
 function getProjects (req, res) {
     Project.find()
         .then(projects => {
@@ -45,7 +45,7 @@ function getProjects (req, res) {
 
 
 // POSTS a new project to MONGO
-app.post('/api/create-project', createProject);
+app.post('/api/projects', createProject);
 function createProject (req, res) {
     const proj = req.body
 
@@ -54,6 +54,16 @@ function createProject (req, res) {
             res.status(200).json(proj);
         });
 };
+
+app.put('/api/projects/:projectId', (req, res, err) => {
+    const projectInformation = req.body;
+    const projectId = req.params.projectId
+
+    Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
+        .then(project => res.status(200).json(project))
+        .catch(err)
+
+}) 
 
 
 // The Employee API  

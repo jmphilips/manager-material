@@ -1,40 +1,48 @@
+
   <md-content layout-padding="">
     <div>
-      <form name="projectForm">
+      <form name="userForm">
 
-    
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm="">
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs="">
             <label>Company</label>
             <input ng-model="company">
           </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Contact's Email</label>
-            <input ng-model="email">
+          <md-input-container>
+            <label>Start Date</label>
+            <md-datepicker ng-model="start"></md-datepicker>
+          </md-input-container>
+
+          <md-input-container>
+            <label>End Date</label>
+            <md-datepicker ng-model="end"></md-datepicker>
           </md-input-container>
         </div>
 
-        <div layout-gt-sm="row">
+          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm="">
-            <label>Contact's Name</label>
+            <label>Contact</label>
             <input ng-model="contactName">
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm="">
-            <label>url</label>
-            <input ng-model="url">
+            <label>Email</label>
+            <input ng-model="email">
           </md-input-container>
         </div>
-          </md-input-container>
+
         </div>
 
         <md-input-container class="md-block">
           <label>Description</label>
-          <textarea ng-model="project.description" rows="5" md-select-on-focus=""></textarea>
+          <textarea ng-model="Description" md-maxlength="300" rows="5" md-select-on-focus=""></textarea>
         </md-input-container>
 
-        <md-button class="btn1" ng-click="createProject();"> Submit </md-button>
+
       </form>
     </div>
-</md-content>
+
+
+    <md-button class="btn1" ng-click="submitProjectPressed();"> Submit </md-button>
+  </md-content>

@@ -6,7 +6,7 @@ app.factory('DateFactory', function($http, $q){
         return $q(function(resolve, reject){
             $http({
                 method: "GET", 
-                url: "/api/get-projects"
+                url: "/api/projects"
             })
             .success(function(dates){
                 resolve(dates)
