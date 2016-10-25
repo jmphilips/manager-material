@@ -15,21 +15,16 @@
     <div flex="100" flex-gt-sm="50" layout="column">
       <div>
         <fieldset class="standard">
-          <legend>Technologies</legend>
+          <legend>Project Technologies</legend>
           <div layout="row" layout-wrap="" flex="">
             <div flex="50" ng-repeat="item in items">
               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                {{ item }} <span ng-if="exists(item, selected)">selected</span>
+                {{ item }} 
               </md-checkbox>
             </div>
           </div>
         </fieldset>
       </div>
-    </div>
-
-    <div flex="100">
-      <h2 class="md-title">Selected Items</h2>
-      <code style="display: block; padding: 8px;">{{selected | json}}</code>
     </div>
   </div>
 

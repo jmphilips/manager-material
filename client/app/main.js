@@ -16,5 +16,9 @@ app.config($routeProvider =>
             templateUrl: '/partials/create-new-project.html',
             controller: 'NewProjectCtrl'
         })
+        .when('/create-employee', {
+            templateUrl: '/partials/create-new-employee.html',
+            controller: 'NewEmployeeCtrl'
+        })
 );
         

@@ -69,7 +69,7 @@ app.put('/api/projects/:projectId', (req, res, err) => {
 
 // The Employee API  
 // GETS all of the employees from MONGO
-app.get('/api/get-employees', getEmployees);
+app.get('/api/employees', getEmployees);
 
 function getEmployees (req, res) {
     Employee.find()
@@ -79,7 +79,7 @@ function getEmployees (req, res) {
 };
 
 // POSTS a new employee to MONGO.
-app.post('/api/create-employee', createEmployee);
+app.post('/api/employees', createEmployee);
 
 function createEmployee (req, res) {
     const emp = req.body

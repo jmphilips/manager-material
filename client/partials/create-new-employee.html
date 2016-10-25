@@ -1,0 +1,43 @@
+  <md-content layout-padding="">
+    <div>
+      <form name="userForm">
+
+     
+
+        <md-input-container class="md-block" flex-gt-sm="">
+            <label>First name</label>
+            <input ng-model="firstName">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Last Name</label>
+            <input ng-model="lastName">
+          </md-input-container>
+        
+           <md-input-container class="md-block" flex-gt-sm="">
+            <label>Email</label>
+            <input ng-model="email">
+          </md-input-container>
+
+
+          <div flex="100" flex-gt-sm="50" layout="column">
+            <div>
+              <fieldset class="standard">
+                <legend>Technology Skills</legend>
+                <div layout="row" layout-wrap="" flex="">
+                  <div flex="50" ng-repeat="item in items">
+                    <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                      {{ item }} 
+                    </md-checkbox>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+         
+          <md-button md-no-ink="" class="md-primary" ng-click="submitButtonPressed()">Submit</md-button>
+      </form>
+    </div>
+  </md-content>
+
