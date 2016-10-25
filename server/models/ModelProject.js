@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 
 module.exports = mongoose.model("Project", {
     title: String, 
+    company: String,
+    email: String,
+    contactName: String,
     description: String,
     employees: [String], 
     start: String,
@@ -11,3 +14,11 @@ module.exports = mongoose.model("Project", {
     url: String, 
     stick: { type: Boolean, default: true },
 })
+
+
+
+
+        
+
+      
+       

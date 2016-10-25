@@ -8,7 +8,11 @@ app.config($routeProvider =>
             templateUrl: '/partials/main.html',
             controller: 'MainCtrl'      
         })
-        .when('/new-project', {
+        .when('/edit-project/:projectId', {
+            templateUrl: '/partials/edit-project.html',
+            controller: 'EditProjectCtrl'
+        })
+        .when('/create-project', {
             templateUrl: '/partials/create-new-project.html',
             controller: 'NewProjectCtrl'
         })

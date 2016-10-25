@@ -1,20 +1,17 @@
 'use strict'
 
-app.controller('NewProjectCtrl', function($scope){
-    $scope.myDate = new Date();
+app.controller('NewProjectCtrl', function($scope, $http, $location){
 
-  $scope.minDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() - 2,
-      $scope.myDate.getDate());
+    $scope.createProject = () => {
 
-  $scope.maxDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() + 2,
-      $scope.myDate.getDate());
+        const project = {
+            title: $scope.title,
+        };
 
-  $scope.onlyWeekendsPredicate = function(date) {
-    var day = date.getDay();
-    return day === 0 || day === 6;
-  };
+        $http.post('/api/create-project', project)
+        .then(({data}) => {
+            $location.path('/edit-project/' + data._id)
+        })
+
+    };
 });
