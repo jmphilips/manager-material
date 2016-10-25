@@ -28,7 +28,7 @@ app.controller('MainCtrl', function($scope, $http, uiCalendarConfig, DateFactory
 
     $scope.uiConfig = {
       calendar:{
-        height: 100,
+        height: 600,
         editable: true,
         header:{
           left: 'title',
