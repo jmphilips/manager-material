@@ -59,18 +59,25 @@ function createProject (req, res) {
 app.put('/api/projects/:projectId', (req, res, err) => {
     const projectInformation = req.body;
     const projectId = req.params.projectId
-
     Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
         .then(project => res.status(200).json(project))
         .catch(err)
 
-}) 
+}) ;
+
+// Grabs a single project
+app.get('/api/projects/:projectId', (req, res, err) => {
+    const projectId = req.params.projectId
+    Project.findOne({"_id": projectId})
+        .then(project => res.status(200).json(project))
+        .catch(err)
+
+}) ;
 
 
 // The Employee API  
 // GETS all of the employees from MONGO
 app.get('/api/employees', getEmployees);
-
 function getEmployees (req, res) {
     Employee.find()
         .then(employees => {
@@ -80,7 +87,6 @@ function getEmployees (req, res) {
 
 // POSTS a new employee to MONGO.
 app.post('/api/employees', createEmployee);
-
 function createEmployee (req, res) {
     const emp = req.body
 

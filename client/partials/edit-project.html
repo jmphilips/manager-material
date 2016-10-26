@@ -40,6 +40,21 @@
         </md-input-container>
 
 
+
+          <div flex="100" flex-gt-sm="50" layout="column">
+            <div>
+              <fieldset class="standard">
+                <legend>Employees</legend>
+                <div layout="row" layout-wrap="" flex="">
+                  <div flex="50" ng-repeat="item in items">
+                    <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                      {{ item.firstName }} {{ item.lastName}}
+                    </md-checkbox>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
       </form>
     </div>
 
