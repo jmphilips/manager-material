@@ -17,5 +17,21 @@ app.factory('EmployeeFactory', function($http, $q){
         })
     };
 
-    return {GetEmployees}
+        const GetEmployeeById = function(params) {
+        return $q(function(resolve, reject){
+            $http({
+                method: "GET", 
+                url: `/api/employees/${params}`
+            })
+            .success(function(employee){
+                resolve(employee)
+            })
+        })
+        .catch(function(error){
+            reject(error)
+        })
+    };
+
+
+    return {GetEmployees, GetEmployeeById}
 })

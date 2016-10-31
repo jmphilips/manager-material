@@ -97,6 +97,16 @@ function createEmployee (req, res) {
     })
 };
 
+app.get('/api/employees/:employeeId', (req, res, err) => {
+    const employeeId = req.params.employeeId
+    Employee.findOne({"_id": employeeId})
+        .then(employee => res.status(200).json(employee))
+        .catch(err)
+
+}) ;
+
+
+
 // The Manager API  
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager); 

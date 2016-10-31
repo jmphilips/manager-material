@@ -24,5 +24,9 @@ app.config($routeProvider =>
             templateUrl: '/partials/calendar.html',
             controller: 'CalendarCtrl'
         })
+        .when('/employee-view/:employeeId', {
+            templateUrl: '/partials/employee-view.html',
+            controller: 'EmployeeViewCtrl'
+        })
 );
         
