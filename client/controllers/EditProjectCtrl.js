@@ -1,8 +1,9 @@
 'use strict'
 
-app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParams, EmployeeFactory, ProjectFactory){
+app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParams, EmployeeFactory, ProjectFactory, lodash){
 
     const projectId = $routeParams.projectId;
+
 
 
     const empAndProjTechMatch = () => {
@@ -14,10 +15,10 @@ app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParam
             ProjectFactory.GetProject(projectId) 
             .then(({technologies}) => {
 
-                $scope.items = []
-                technologies.forEach((tech) => {employees.forEach( (emp) => { if(emp.skills.includes(tech)) {$scope.items.push(emp)} })})
+                let items = []
+                technologies.forEach((tech) => {employees.forEach( (emp) => { if(emp.skills.includes(tech)) {items.push(emp)} })})
+                $scope.items = lodash.uniq(items)
             })})}
-
             
       $scope.selected = [];
       $scope.toggle = function (item, list) {

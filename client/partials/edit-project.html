@@ -44,7 +44,7 @@
               <fieldset class="standard">
                 <legend>Employees</legend>
                 <div layout="row" layout-wrap="" flex="">
-                  <div flex="50" ng-repeat="item in items">
+                  <div flex="50" ng-repeat="item in items track by item._id">
                     <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)" ng-required="true">
                       {{ item.firstName }} {{ item.lastName}}
                     </md-checkbox>

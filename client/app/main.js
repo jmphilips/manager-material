@@ -1,6 +1,6 @@
 'use strict'
 
-var app = angular.module('project-manager', ['ngRoute', 'ui.calendar', 'ngMaterial'])
+var app = angular.module('project-manager', ['ngRoute', 'ui.calendar', 'ngMaterial', 'ngLodash'])
 
 app.config($routeProvider => 
     $routeProvider
