@@ -1,23 +1,17 @@
+<div class="layout-padding">
 <div layout="row" layout-xs="column">
   <div flex >
-
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>
           <span>Projects</span>
         </h2>
         <span flex=""></span>
-        <md-button class="md-raised" aria-label="Learn More">
+        <md-button class="md-raised" ng-href="/#/create-project">
           Create New Project
         </md-button>
       </div>
     </md-toolbar>
-
-
-
-
-
-
 
 <div ng-repeat="date in dates">
        <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="">
@@ -42,7 +36,7 @@
           <span>Employees</span>
         </h2>
         <span flex=""></span>
-        <md-button class="md-raised" aria-label="Learn More">
+        <md-button class="md-raised" ng-href="/#/create-employee">
           Create New Employee
         </md-button>
       </div>
@@ -63,14 +57,4 @@
 
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
+</div>
