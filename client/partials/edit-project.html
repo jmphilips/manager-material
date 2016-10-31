@@ -6,29 +6,29 @@
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex-gt-xs="">
             <label>Company</label>
-            <input ng-model="company">
+            <input ng-model="company" ng-required="true">
           </md-input-container>
 
           <md-input-container>
             <label>Start Date</label>
-            <md-datepicker ng-model="start"></md-datepicker>
+            <md-datepicker ng-model="start" ng-required="true"></md-datepicker>
           </md-input-container>
 
           <md-input-container>
             <label>End Date</label>
-            <md-datepicker ng-model="end"></md-datepicker>
+            <md-datepicker ng-model="end" ng-required="true"></md-datepicker>
           </md-input-container>
         </div>
 
           <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Contact</label>
-            <input ng-model="contactName">
+            <input ng-model="contactName" ng-required="true">
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Email</label>
-            <input ng-model="email">
+            <input ng-model="email" ng-required="true">
           </md-input-container>
         </div>
 
@@ -36,10 +36,8 @@
 
         <md-input-container class="md-block">
           <label>Description</label>
-          <textarea ng-model="Description" md-maxlength="300" rows="5" md-select-on-focus=""></textarea>
+          <textarea ng-model="Description" md-maxlength="300" rows="5" md-select-on-focus="" ng-required="true"></textarea>
         </md-input-container>
-
-
 
           <div flex="100" flex-gt-sm="50" layout="column">
             <div>
@@ -47,7 +45,7 @@
                 <legend>Employees</legend>
                 <div layout="row" layout-wrap="" flex="">
                   <div flex="50" ng-repeat="item in items">
-                    <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                    <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)" ng-required="true">
                       {{ item.firstName }} {{ item.lastName}}
                     </md-checkbox>
                   </div>

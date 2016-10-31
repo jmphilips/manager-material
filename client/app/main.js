@@ -20,5 +20,9 @@ app.config($routeProvider =>
             templateUrl: '/partials/create-new-employee.html',
             controller: 'NewEmployeeCtrl'
         })
+        .when('/calendar', {
+            templateUrl: '/partials/calendar.html',
+            controller: 'CalendarCtrl'
+        })
 );
         

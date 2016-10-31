@@ -18,12 +18,7 @@ app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParam
                 technologies.forEach((tech) => {employees.forEach( (emp) => { if(emp.skills.includes(tech)) {$scope.items.push(emp)} })})
             })})}
 
-
-                
-     
-               
-
-
+            
       $scope.selected = [];
       $scope.toggle = function (item, list) {
         var idx = list.indexOf(item);
