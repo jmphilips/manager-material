@@ -36,7 +36,7 @@ const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/projec
 // The Project API 
 // GETS all of the projects from MONGO
 app.get('/api/projects', getProjects);
-
+app.get('/api/projects/slack', getProjects)
 function getProjects (req, res) {
     Project.find()
         .then(projects => {
@@ -170,4 +170,3 @@ mongoose.connect(MONGODB_URL, () => {
 
 
 
-app.get('/api/projects/slack', getProjects)
