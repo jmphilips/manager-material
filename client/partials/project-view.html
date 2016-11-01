@@ -17,12 +17,12 @@
   <md-content class="md-no-momentum">
     <md-input-container class="md-icon-float md-block"> 
       <label>Update</label>
-      <input ng-model="toUpdate" type="text">
+      <input ng-model="toUpdate.message" type="text">
       <md-button class="md-raised" ng-click="updateProjectPressed()">Update</md-button>
     </md-input-container>
     </md-content>
 </div>
 
 <div ng-repeat="update in project.updates">
-  <p>{{update}}</p>
+  <p>{{update.message}}</p>
 </div>

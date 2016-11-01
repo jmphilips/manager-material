@@ -28,8 +28,6 @@ app.controller('NewProjectCtrl', function($scope, $http, $location){
             technologies: $scope.selected
         };
 
-       
-
         $http.post('/api/projects', project)
         .then(({data}) => {
             $location.path('/edit-project/' + data._id)

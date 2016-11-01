@@ -4,30 +4,30 @@ app.controller('ProjectViewCtrl', function($routeParams, ProjectFactory, $scope,
 
     let projectId = $routeParams.projectId;
     let updatesArray = [];
-    let timeStampArray = [];
+
 
     ProjectFactory.GetProject(projectId)
     .then(project => {
         $scope.project = project
         project.updates.forEach(update => updatesArray.push(update))
-        project.timeStamps.forEach(time => timeStampArray.push(time))
     })
 
     
 
     $scope.updateProjectPressed = () => {
-      
-        updatesArray.push($scope.toUpdate)
-        timeStampArray.push(moment().utcOffset(-300))
+        $scope.toUpdate.timeStamp = moment()
+        updatesArray.push($scope.toUpdate)  
         const project = {
-            updates: updatesArray,
-            timeStamps: timeStampArray
+            updates: updatesArray
         }
+       
+
         const projectPath = `/api/projects/${projectId}`;
 
         $http.put(projectPath, project)
         .then(() => {
-
+                $scope.toUpdate.message = ""
+                updatesArray = [];
                ProjectFactory.GetProject(projectId)
     .then(project => {
         $scope.project = project

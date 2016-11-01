@@ -35,7 +35,6 @@ app.get('/api/title', (req, res) => {
 });
 
 
-
 // The Project API 
 // GETS all of the projects from MONGO
 app.get('/api/projects', getProjects);
@@ -45,7 +44,6 @@ function getProjects (req, res) {
             res.status(200).json(projects);
         });
 };
-
 
 // POSTS a new project to MONGO
 app.post('/api/projects', createProject);
@@ -76,9 +74,6 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
-
-
-
 
 
 // The Employee API  
