@@ -32,18 +32,12 @@ app.use(session({
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/project-employee';
 
-app.get('/api/title', (req, res) => {
-    res.send({title: 'Welcome'});
-});
-
 
 // The Project API 
 // GETS all of the projects from MONGO
 app.get('/api/projects', getProjects);
+
 function getProjects (req, res) {
-
-    console.log("Got it")
-
     Project.find()
         .then(projects => {
             res.status(200).json(projects);
@@ -60,15 +54,6 @@ function createProject (req, res) {
             res.status(200).json(proj);
         });
 
-
-        var reply = slack.respond(req.body,function(hook) {
- 
-        return {
-            text: 'Good point, ' + hook.user_name,
-            username: 'Bot'
-        };
- 
-    });
  
 };
 
@@ -111,27 +96,6 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
-
-
-app.get('/api/projects/slack/:projectId', (req, res, err) => {
-    const projectId = req.params.projectId
-    Project.findOne({"_id": projectId})
-        .then(project => res.status(200).json(project))
-        .catch(err)
-
-}) 
-
-
-app.get('/api/projects/slack', getProjects);
-
-
-
-
-
-
-
-
-
 
 
 
@@ -201,3 +165,9 @@ mongoose.connect(MONGODB_URL, () => {
         console.log(`Listening on Port: ${PORT}`);
     });
 });
+
+
+
+
+
+app.get('/api/projects/slack', getProjects)
