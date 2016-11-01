@@ -9,6 +9,9 @@ app.factory('DateFactory', function($http, $q){
                 url: "/api/projects"
             })
             .success(function(dates){
+                dates.forEach(date => {
+                    date.url = `/#/project-view/${date._id}`
+                })
                 resolve(dates)
             })
         })

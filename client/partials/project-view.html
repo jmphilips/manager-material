@@ -1,0 +1,28 @@
+<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Projects</span>
+        </h2>
+        <span flex=""></span>
+        <md-button class="md-raised" ng-href="/#/main">
+          Back
+        </md-button>
+      </div>
+    </md-toolbar>
+<h1>{{project.title}}</h1>
+<p>Deadline: {{project.end | date:'medium'}}</p>
+
+
+<div layout="column" layout-padding="" ng-cloak="" class="inputdemoIcons">
+  <md-content class="md-no-momentum">
+    <md-input-container class="md-icon-float md-block"> 
+      <label>Update</label>
+      <input ng-model="toUpdate" type="text">
+      <md-button class="md-raised" ng-click="updateProjectPressed()">Update</md-button>
+    </md-input-container>
+    </md-content>
+</div>
+
+<div ng-repeat="update in project.updates">
+  <p>{{update}}</p>
+</div>

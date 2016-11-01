@@ -13,7 +13,9 @@ module.exports = mongoose.model("Project", {
     end: String, 
     url: String, 
     stick: { type: Boolean, default: true },
-    technologies: [String]
+    technologies: [String],
+    updates: [String],
+    timeStamps: [Date]
 })
 
 

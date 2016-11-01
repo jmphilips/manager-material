@@ -1,6 +1,8 @@
 'use strict'
 
-app.controller('CalendarCtrl', function($scope, $http, uiCalendarConfig, DateFactory, $compile){
+app.controller('CalendarCtrl', function($scope, $http, uiCalendarConfig, DateFactory, $compile, $rootScope){
+
+
      
     var date = new Date();
     var d = date.getDate();
@@ -48,7 +50,6 @@ app.controller('CalendarCtrl', function($scope, $http, uiCalendarConfig, DateFac
       var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
       callback(events);
     };
-
 
     /* event source that contains custom events on the scope */
     $scope.eventSources = [$scope.events, $scope.eventsF];

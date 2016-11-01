@@ -7,6 +7,9 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
 
+
+
+
 // const Project = require('./models/ProjectModels.js');
 const Project = require('./models/ModelProject.js');
 
@@ -75,6 +78,9 @@ app.get('/api/projects/:projectId', (req, res, err) => {
 }) ;
 
 
+
+
+
 // The Employee API  
 // GETS all of the employees from MONGO
 app.get('/api/employees', getEmployees);
@@ -102,8 +108,7 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
     Employee.findOne({"_id": employeeId})
         .then(employee => res.status(200).json(employee))
         .catch(err)
-
-}) ;
+});
 
 
 
@@ -112,7 +117,6 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
 app.post('/api/create-manager', createManager); 
 function createManager(req, res) {
     const manager = req.body
-
     Manager.create(manager)
         .then(manager => {
             console.log(manager)
@@ -122,6 +126,7 @@ function createManager(req, res) {
 
 // Logs in a manager. 
 app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
+    console.log(email, " ", password)
     Manager.findOne({ email })
         .then(manager => {
             if (manager && password === manager.password) {
@@ -131,7 +136,7 @@ app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
                 res.status(400).json(err)
             }
         })
-})
+});
 
 
 

@@ -2,11 +2,16 @@
 
 var app = angular.module('project-manager', ['ngRoute', 'ui.calendar', 'ngMaterial', 'ngLodash'])
 
+
 app.config($routeProvider => 
     $routeProvider
-        .when('/', {
+         .when('/', {
+            templateUrl: 'partials/login.html',
+            controller: 'LoginCtrl'
+        })
+        .when('/main', {
             templateUrl: '/partials/main.html',
-            controller: 'MainCtrl'      
+            controller: 'MainCtrl'    
         })
         .when('/edit-project/:projectId', {
             templateUrl: '/partials/edit-project.html',
@@ -28,5 +33,11 @@ app.config($routeProvider =>
             templateUrl: '/partials/employee-view.html',
             controller: 'EmployeeViewCtrl'
         })
+         .when('/project-view/:projectId', {
+            templateUrl: '/partials/project-view.html',
+            controller: 'ProjectViewCtrl'
+        })
+        .otherwise('/')
+        
 );
         

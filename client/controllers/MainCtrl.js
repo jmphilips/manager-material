@@ -7,7 +7,5 @@ app.controller('MainCtrl', function($scope, DateFactory, EmployeeFactory){
 
    EmployeeFactory.GetEmployees()
    .then(employees => {$scope.employees = employees});
-
    
-
 })

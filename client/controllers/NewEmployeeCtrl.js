@@ -32,7 +32,7 @@ app.controller('NewEmployeeCtrl', function($scope, $http, $location) {
 
         $http.post('/api/employees', emp)
         .then(() => {
-            $location.path('/')
+            $location.path('/main')
         })
     }
 });

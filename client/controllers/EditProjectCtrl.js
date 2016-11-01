@@ -3,12 +3,8 @@
 app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParams, EmployeeFactory, ProjectFactory, lodash){
 
     const projectId = $routeParams.projectId;
-
-
-
     const empAndProjTechMatch = () => {
         
-
         EmployeeFactory.GetEmployees()
         .then((employees) => {
 
@@ -58,7 +54,7 @@ app.controller('EditProjectCtrl', function($scope, $http, $location, $routeParam
 
         $http.put(projectPath, project)
         .then(() => {
-            $location.path('/')
+            $location.path('/main')
         })
     };
 

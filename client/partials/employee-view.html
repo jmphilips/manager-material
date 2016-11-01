@@ -1,5 +1,20 @@
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Projects</span>
+        </h2>
+        <span flex=""></span>
+        <md-button class="md-raised" ng-href="/#/main">
+          Back
+        </md-button>
+      </div>
+    </md-toolbar>
 <h1>{{employee.firstName}} {{employee.lastName}}</h1>
 <h3>Skills</h3>
 <div ng-repeat="skill in employee.skills">
     <p>{{skill}}</p>
+</div>
+<h3>Projects Working on</h3>
+<div ng-repeat="project in projects">
+    <p>{{project.title}}</p>
 </div>
