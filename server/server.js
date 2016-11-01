@@ -8,6 +8,16 @@ const RedisStore = require('connect-redis')(session);
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
+
+var Slack = require('node-slack');
+var slack = new Slack('https://hooks.slack.com/services/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');
+
+
+
+
+
+
+
 const transporter = nodemailer.createTransport(
     smtpTransport('smtps://jmichaelphilips@gmail.com:j4381528@smtp.gmail.com')
 );
@@ -36,13 +46,43 @@ const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/projec
 // The Project API 
 // GETS all of the projects from MONGO
 app.get('/api/projects', getProjects);
-app.get('/api/projects/slack', getProjects)
 function getProjects (req, res) {
     Project.find()
         .then(projects => {
             res.status(200).json(projects);
         });
 };
+
+
+app.post('/yesman',function(req,res) {
+    // var reply = slack.respond(req.body,function(hook) {
+    //     return {
+    //         text: 'Good point, ' + hook.user_name,
+    //         username: 'Bot'
+    //     };
+    // });
+    // res.json(reply);
+
+   
+
+
+    slack.send({
+    text: 'Howdy!',
+    channel: '#general',
+    username: 'Bot'
+    });
+
+
+});
+
+
+
+
+
+
+
+
+
 
 // POSTS a new project to MONGO
 app.post('/api/projects', createProject);
@@ -53,8 +93,6 @@ function createProject (req, res) {
         .then(proj => {
             res.status(200).json(proj);
         });
-
- 
 };
 
 // Updates the project object
@@ -96,8 +134,6 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
-
-
 
 
 
@@ -159,14 +195,18 @@ app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
 
 
 
+
+
+
+
+
+
+
+
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URL, () => {
      app.listen(PORT, () => {
         console.log(`Listening on Port: ${PORT}`);
     });
 });
-
-
-
-
 
