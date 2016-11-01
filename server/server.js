@@ -55,24 +55,13 @@ function getProjects (req, res) {
 
 
 app.post('/yesman',function(req,res) {
-    // var reply = slack.respond(req.body,function(hook) {
-    //     return {
-    //         text: 'Good point, ' + hook.user_name,
-    //         username: 'Bot'
-    //     };
-    // });
-    // res.json(reply);
-
-   
-
-
-    slack.send({
-    text: 'Howdy!',
-    channel: '#general',
-    username: 'Bot'
+    var reply = slack.respond(req.body,function(hook) {
+        return {
+            text: 'Good point, ' + hook.user_name,
+            username: 'Bot'
+        };
     });
-
-
+    res.json(reply);
 });
 
 
