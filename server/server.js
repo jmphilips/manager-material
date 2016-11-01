@@ -56,8 +56,9 @@ function getProjects (req, res) {
 
 app.post('/yesman',function(req,res) {
     var reply = slack.respond(req.body,function(hook) {
+        let params = hook.params
         return {
-            text: `${hook.params}`,
+            text: `${params}`,
             username: 'Bot'
         };
     });
