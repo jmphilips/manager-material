@@ -121,14 +121,8 @@ app.get('/api/projects/slack/:projectId', (req, res, err) => {
 
 }) 
 
-app.get('/api/projects/slack/projects', (req, res, err) => {
-    const projectId = req.params.projectId
-    Project.findOne({"_id": projectId})
-        .then(project => res.status(200).json(project))
-        .catch(err)
 
-}) 
-
+app.get('/api/projects/slack', getProjects);
 
 
 
