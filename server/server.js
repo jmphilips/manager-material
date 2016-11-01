@@ -5,10 +5,12 @@ const mongoose = require('mongoose');
 const { json } = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 
-
-
-
+const transporter = nodemailer.createTransport(
+    smtpTransport('smtps://jmichaelphilips@gmail.com:j4381528@smtp.gmail.com')
+);
 
 // const Project = require('./models/ProjectModels.js');
 const Project = require('./models/ModelProject.js');
@@ -39,6 +41,9 @@ app.get('/api/title', (req, res) => {
 // GETS all of the projects from MONGO
 app.get('/api/projects', getProjects);
 function getProjects (req, res) {
+
+    console.log("Got it")
+
     Project.find()
         .then(projects => {
             res.status(200).json(projects);
@@ -54,16 +59,48 @@ function createProject (req, res) {
         .then(proj => {
             res.status(200).json(proj);
         });
+
+
+        var reply = slack.respond(req.body,function(hook) {
+ 
+        return {
+            text: 'Good point, ' + hook.user_name,
+            username: 'Bot'
+        };
+ 
+    });
+ 
 };
 
 // Updates the project object
 app.put('/api/projects/:projectId', (req, res, err) => {
+    let updatedProject
     const projectInformation = req.body;
     const projectId = req.params.projectId
     Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
-        .then(project => res.status(200).json(project))
-        .catch(err)
+        .then(project => {
+            res.status(200).json(project) 
 
+       console.log(project.updates.length)
+        
+        if(project.updates.length > 0) {
+        transporter.sendMail({
+            from: 'jmichaelphilips@gmail.com',
+            to: project.email,
+            subject: `Updates about ${project.title}`,
+            text: `${project.updates}`
+        }, (error, response) => {
+        if (error) {
+            console.log(error);
+        } else {
+        console.log(`Message sent`);
+        }
+         });
+        
+        }
+    
+        })
+        .catch(err)
 }) ;
 
 // Grabs a single project
@@ -74,6 +111,36 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
+
+
+app.get('/api/projects/slack/:projectId', (req, res, err) => {
+    const projectId = req.params.projectId
+    Project.findOne({"_id": projectId})
+        .then(project => res.status(200).json(project))
+        .catch(err)
+
+}) 
+
+app.get('/api/projects/slack/', (req, res, err) => {
+    const projectId = req.params.projectId
+    Project.findOne({"_id": projectId})
+        .then(project => res.status(200).json(project))
+        .catch(err)
+
+}) 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // The Employee API  
@@ -93,7 +160,7 @@ function createEmployee (req, res) {
 
     Employee.create(emp)
         .then(emp => {
-            console.log(emp)
+          
             res.status(200).json(emp)
     })
 };
@@ -121,7 +188,6 @@ function createManager(req, res) {
 
 // Logs in a manager. 
 app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
-    console.log(email, " ", password)
     Manager.findOne({ email })
         .then(manager => {
             if (manager && password === manager.password) {
