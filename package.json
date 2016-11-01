@@ -29,6 +29,7 @@
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
+    "node-slack": "0.0.7",
     "nodemailer": "^2.6.4"
   }
 }
