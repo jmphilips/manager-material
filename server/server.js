@@ -92,7 +92,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                 let projectFiltered = projects.filter(project => {return project.employees.includes(employee._id)})
 
 
-                   var body = {
+        var body = {
         response_type: "in_channel",
         "attachments": [
           {
@@ -101,11 +101,28 @@ app.post('/slack-slash/get-employee', function(req, res){
           }
         ]
       };
-
-
-                 res.send(body);
+            res.send(body);
             })           
         })   
+})
+
+
+
+app.post('/slack-slash/update-project', function(req, res){
+
+    const projectAndUpdateArray = req.body.text.split(" | ");
+
+    var body = {
+        response_type: "in_channel",
+        "attachments": [
+          {
+            "text": `${projectAndUpdateArray[0]} + ${projectAndUpdateArray[1]}`     
+          }
+        ]
+      };
+
+      res.send(body)
+
 })
 
 
