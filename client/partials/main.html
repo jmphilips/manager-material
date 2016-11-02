@@ -1,8 +1,14 @@
-<div class="layout-padding">
+<!--<div class="layout-padding">-->
+<md-toolbar class="md-tall">
+      <h2 class="md-toolbar-tools">
+        
+      </h2>
+</md-toolbar>
+
 <div layout="row" layout-xs="column">
   <div flex >
     <md-toolbar>
-      <div class="md-toolbar-tools">
+      <div class="md-toolbar-tools md-accent">
         <h2>
           <span>Projects</span>
         </h2>
@@ -14,7 +20,7 @@
     </md-toolbar>
 
 <div ng-repeat="date in dates">
-       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="">
+       <md-card md-theme="cyan" >
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{date.title}}</span>
@@ -57,4 +63,4 @@
 
   </div>
 </div>
-</div>
+<!--</div>-->

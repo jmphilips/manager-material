@@ -10,17 +10,17 @@ const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const Slack = require('node-slack');
 const slack = new Slack('https://hooks.slack.com/services/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');
-
 const transporter = nodemailer.createTransport(
     smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
 );
 
-
+// Mongoose Models
 const Project = require('./models/ModelProject.js');
 const Employee = require('./models/EmployeeModel.js');
 const Manager = require('./models/ManagerModel.js');
 
 
+// Static wares
 const app = express();
 app.use(express.static('client'));
 app.use(json())
@@ -32,6 +32,7 @@ app.use(session({
     secret: 'thesecretkey'
 }));
 
+// Environment Variables
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/project-employee';
 
@@ -46,112 +47,94 @@ function getProjects (req, res) {
         });
 };
 
-
-
-
+// This slack post sends the project updates to slack with the /check_project #projectId command 
 app.post('/slack-slash/get-project', function(req, res){
   //take a message from Slack slash command
-
     const title = req.body.text 
-
     Project.findOne( {title} )
         .then(project => {
+
         let newString = "";
         project.updates.forEach(update => {newString += `${update.timeStamp}: ${update.message}\n`})
 
-    var body = {
-        response_type: "in_channel",
-        "attachments": [
-          {
-            "text": "Title: " + project.title + '\n' + 
-                    `Updates:\n` + newString
-          }
-        ]
-      };
-             res.send(body);
+            var body = {
+                response_type: "in_channel",
+                "attachments": [
+                    {
+                        "text": "Title: " + project.title + '\n' + 
+                                `Updates:\n` + newString
+                    }
+                ]
+            };
+            res.send(body);
         })   
 })
 
 
-
+//////////////////////////////////////////////////////////  FIX THIS
+// Returns the list of projects that an employee is working on on the slack command /check_employee #employee.lastName
 app.post('/slack-slash/get-employee', function(req, res){
   //take a message from Slack slash command
-
     const lastName = req.body.text 
 
     Employee.findOne( {lastName} )
         .then(employee => {
+            Project.find()
+                .then(projects => {
 
-        Project.find()
-            .then(projects => {
-                let projectFiltered = projects.filter(project => {return project.employees.includes(employee._id)})
+                    let projectFiltered = projects.filter(project => {return project.employees.includes(employee._id)})
+
+                    // This is the message that is sent back to slack. 
+                    let body = {
+                        response_type: "in_channel",
+                         "attachments": [
+                            {
+                                "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
+                                        "Projects: " + projectFiltered      
+                            }
+                        ]
+                    };
+                    res.send(body);
+                })           
+            })   
+});
 
 
-        var body = {
-        response_type: "in_channel",
-        "attachments": [
-          {
-            "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
-                    "Projects: " + projectFiltered      
-          }
-        ]
-      };
-            res.send(body);
-            })           
-        })   
-})
-
-
-
+// Updates the project via a command in slack. 
+// Example command is /update_project 
+// takes a parameter seperated by a | 
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true, new: true})
       .then(project => {
 
-        
-           transporter.sendMail({
-  from: 'project.manager.helper@gmail.com',
-  to: `${project.email}`,
-  subject: `Updates about ${project.title}`,
-  text: `${project.updates}`
-}, (error, response) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(`Message sent`);
-  }
-});
+        // Sends an email with all of the updates
+            transporter.sendMail({
+                from: 'project.manager.helper@gmail.com',
+                to: `${project.email}`,
+                subject: `Updates about ${project.title}`,
+                text: `${project.updates}`
+            }, (error, response) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(`Message sent`);
+                }
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-        var body = {
-            response_type: "in_channel",
-            "attachments": [
-            {
-                "text": "Updated"
+            // This is the message that is sent back to slack. 
+            let body = {
+                response_type: "in_channel",
+                        "attachments": [
+                            {
+                                "text": "Updated"
             
-            }
-            ]
-        };
-    res.send(body);
-
-
-
-
-
+                            }
+                        ]
+            };
+            res.send(body);
       })
-
 })
-
 
 
 // POSTS a new project to MONGO
@@ -176,40 +159,30 @@ app.put('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 });
 
-
-
-
+// Triggers the send email function. 
 app.get('/api/send-email/:projectId', (req, res, err) => {
-
     const projectId = req.params.projectId
     Project.findOne({"_id": projectId})
         .then(project => {
-
         if(project.updates.length > 0) {
             transporter.sendMail({
-  from: 'project.manager.helper@gmail.com',
-  to: `${project.email}`,
-  subject: `Updates about ${project.title}`,
-  text: `${project.updates}`
-}, (error, response) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(`Message sent`);
-  }
-});
-            }
+                from: 'project.manager.helper@gmail.com',
+                to: `${project.email}`,
+                subject: `Updates about ${project.title}`,
+                text: `${project.updates}`
 
-            res.end()
+            }, (error, response) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(`Message sent`);
+                }
+            });
+        }
+        res.end()
+
         })
-
 })
-
-
-
-
-
-
 
 
 // Grabs a single project
@@ -220,7 +193,6 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
-
 
 
 // The Employee API  
@@ -244,6 +216,7 @@ function createEmployee (req, res) {
     })
 };
 
+// Grabs the employees
 app.get('/api/employees/:employeeId', (req, res, err) => {
     const employeeId = req.params.employeeId
     Employee.findOne({"_id": employeeId})
@@ -254,7 +227,6 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
 // The Manager API  
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager); 
-
 
 
 function createManager(req, res) {
