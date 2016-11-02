@@ -82,7 +82,7 @@ app.post('/slack-slash/get-employee', function(req, res){
             Project.find()
                 .then(projects => {
 
-                    let projectFiltered = projects.filter(project => {return project.employees.includes(employee._id)})
+                   
 
                     // This is the message that is sent back to slack. 
                     let body = {
@@ -131,8 +131,7 @@ app.post('/slack-slash/update-project', function(req, res){
                 response_type: "in_channel",
                         "attachments": [
                             {
-                                "text": "Updated"
-            
+                                "text": `Updated ${project.title}`
                             }
                         ]
             };
@@ -218,7 +217,6 @@ function createEmployee (req, res) {
     const emp = req.body
     Employee.create(emp)
         .then(emp => {
-          
             res.status(200).json(emp)
     })
 };
