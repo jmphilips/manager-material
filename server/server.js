@@ -113,7 +113,7 @@ app.post('/slack-slash/update-project', function(req, res){
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
         function(error, project){  
 
-g}
+
     //     });
               
         body = {
