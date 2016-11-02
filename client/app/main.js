@@ -2,7 +2,6 @@
 
 var app = angular.module('project-manager', ['ngRoute', 'ui.calendar', 'ngMaterial', 'ngLodash'])
 
-
 app.config($routeProvider => 
     $routeProvider
          .when('/', {
@@ -39,5 +38,9 @@ app.config($routeProvider =>
         })
         .otherwise('/')
         
-);
+).config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('cyan')
+    .accentPalette('orange');
+})
         

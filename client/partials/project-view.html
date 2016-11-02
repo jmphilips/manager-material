@@ -9,9 +9,10 @@
         </md-button>
       </div>
     </md-toolbar>
+
+<div class="layout-padding">
 <h1>{{project.title}}</h1>
 <p>Deadline: {{project.end | date:'medium'}}</p>
-
 
 <div layout="column" layout-padding="" ng-cloak="" class="inputdemoIcons">
   <md-content class="md-no-momentum">
@@ -24,5 +25,6 @@
 </div>
 
 <div ng-repeat="update in project.updates">
-  <p>{{update.message}}</p>
+  <p><b>{{update.timeStamp | date:'medium'}}</b> - {{update.message}}</p>
+</div>
 </div>
