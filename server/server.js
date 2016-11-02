@@ -111,7 +111,7 @@ app.post('/slack-slash/get-employee', function(req, res){
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
-        function(project){  
+        function(){  
 
     // transporter.sendMail({
     //     from: 'project.manager.helper@gmail.com',
@@ -144,7 +144,6 @@ app.post('/slack-slash/update-project', function(req, res){
 app.post('/api/projects', createProject);
 function createProject (req, res) {
     const proj = req.body
-
     Project.create(proj)
         .then(proj => {
             res.status(200).json(proj);
