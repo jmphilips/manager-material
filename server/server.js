@@ -5,19 +5,21 @@ const mongoose = require('mongoose');
 const { json, urlencoded } = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
-// const nodemailer = require('nodemailer');
-// const smtpTransport = require('nodemailer-smtp-transport');
 
- var sendEmail = require('email-via-gmail'); 
+
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+
+const transporter = nodemailer.createTransport(
+    smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
+);
+
+
 
 var Slack = require('node-slack');
 var slack = new Slack('https://hooks.slack.com/services/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');
 
-// const transporter = nodemailer.createTransport(
-//     smtpTransport('smtps://jmichaelphilips@gmail.com:j4381528@smtp.gmail.com')
-// );
 
-// const Project = require('./models/ProjectModels.js');
 const Project = require('./models/ModelProject.js');
 const Employee = require('./models/EmployeeModel.js');
 const Manager = require('./models/ManagerModel.js');
@@ -141,11 +143,18 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
         .then(project => {
 
         if(project.updates.length > 0) {
-            sendEmail("project.manager.helper@gmail.com",
-                "iloveakie",
-                `Updates about ${project.title}`,
-                `${project.updates}`,
-                `${project.email}`);  
+            transporter.sendMail({
+  from: 'project.manager.helper@gmail.com',
+  to: 'joshtober@gmail.com',
+  subject: 'Hey dad!',
+  text: "Do you love me yet?"
+}, (error, response) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(`Message sent`);
+  }
+});
             }
 
             res.end()
