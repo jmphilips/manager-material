@@ -56,7 +56,7 @@ function getProjects (req, res) {
 
 
 app.post('/yesman',function(req,res) {
-    slack.send(`${req.body}`)
+    slack.send("here")
 });
 
 
