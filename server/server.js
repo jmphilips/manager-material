@@ -57,20 +57,26 @@ function getProjects (req, res) {
 
 app.post('/yesman', function(req, res){
   //take a message from Slack slash command
-  var query = req.body.text
 
+    const title = req.body.text 
 
-      var body = {
+    Project.findOne( {title} )
+        .then(project => {
+    var body = {
         response_type: "in_channel",
         "attachments": [
           {
-            "text": "Location: " + req.body.text + "\n"
-                  + "Temperature: " + "help" + "\n"
-                  + "Condition: " + 'help',
+            "text": "Title: " + project.title
           }
         ]
       };
-      res.send(body);
+
+             res.send(body);
+        })
+        
+
+  
+     
 })
 
 
