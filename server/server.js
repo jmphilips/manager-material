@@ -120,7 +120,7 @@ app.post('/slack-slash/update-project', function(req, res){
     //       }
     //     ]
     //   };
-      res.end()gi}
+      res.end()}
       )
 })
 
