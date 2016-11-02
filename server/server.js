@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport(
     smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
 );
 
-const _ = require('_')
+const _ = require('lodash')
 
 // Mongoose Models
 const Project = require('./models/ModelProject.js');
