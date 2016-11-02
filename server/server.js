@@ -2,12 +2,14 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const { json } = require('body-parser');
+
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var Slack = require('node-slack');
 var slack = new Slack('https://hooks.slack.com/services/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');
@@ -29,7 +31,6 @@ const Manager = require('./models/ManagerModel.js');
 
 const app = express();
 app.use(express.static('client'));
-app.use(json())
 app.use(session({
     store: new RedisStore({url: process.env.REDIS_URL}  || 'redis://localhost:6379'),
     resave: false,
@@ -53,10 +54,12 @@ function getProjects (req, res) {
 
 
 app.post('/yesman',function(req,res) {
+
+    // var query = req.body.text
  
     var reply = slack.respond(req.body,function(hook) {
         return {
-            text: 'Good point, ' + hook.user_name,
+            text: `${req.body.text}`,
             username: 'Bot'
         };
     });
