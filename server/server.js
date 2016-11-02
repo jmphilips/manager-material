@@ -111,19 +111,9 @@ app.post('/slack-slash/get-employee', function(req, res){
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
-        function(){  
+        function(error, project){  
 
-    // transporter.sendMail({
-    //     from: 'project.manager.helper@gmail.com',
-    //     to: `${project.email}`,
-    //     subject: `Updates about ${project.title}`,
-    //     text: `${project.updates}`
-    //     }, (error, response) => {
-    //     if (error) {
-    //     console.log(error);
-    //     } else {
-    //     console.log(`Message sent`);
-    //     }
+g}
     //     });
               
         body = {
