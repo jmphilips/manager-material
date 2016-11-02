@@ -52,29 +52,11 @@ function getProjects (req, res) {
 };
 
 
-app.post('/yesman',function(req,res) {
 
-    var query = req.body.text
-
-
- 
-    // var reply = slack.respond(req.body,function(hook) {
-    //     return {
-    //         text: query,
-    //         username: 'Bot'
-    //     };
-    // });
-    // res.json(reply);
- 
-});
 
 app.post('/yesman', function(req, res){
   //take a message from Slack slash command
   var query = req.body.text
-
-  
-
- 
 
 
       var body = {
@@ -89,29 +71,6 @@ app.post('/yesman', function(req, res){
       };
       res.send(body);
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
