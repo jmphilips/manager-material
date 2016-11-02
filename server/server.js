@@ -141,31 +141,13 @@ app.put('/api/projects/:projectId', (req, res, err) => {
        
         
         if(project.updates.length > 0) {
-
-
             
-            
-       
         sendEmail("project.manager.helper@gmail.com",
 		  "iloveakie",
 		  `Updates about ${project.title}`,
 		  `${project.updates}`,
 		  `${project.email}`);  
 
-
-        // transporter.sendMail({
-        //     from: 'jmichaelphilips@gmail.com',
-        //     to: project.email,
-        //     subject: `Updates about ${project.title}`,
-        //     text: `${project.updates}`
-        // }, (error, response) => {
-        // if (error) {
-        //     console.log(error);
-        // } else {
-        // console.log(`Message sent`);
-        // }
-        //  });
-        
         }
     
         })
