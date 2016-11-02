@@ -79,10 +79,10 @@ app.post('/slack-slash/get-employee', function(req, res){
   //take a message from Slack slash command
     const lastName = req.body.text 
 
-    Employee.findOne( {lastName} )
-        .then(employee => {
-            Project.find()
-                .then(projects => {
+        Project.find()
+        .then(projects => {
+            Employee.findOne({ lastName })
+                .then(employee => {
 
                     console.log(projects)
                     
