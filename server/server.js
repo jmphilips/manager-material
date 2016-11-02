@@ -113,28 +113,24 @@ app.post('/slack-slash/update-project', function(req, res){
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
         function(project){  
 
-
-              transporter.sendMail({
-  from: 'project.manager.helper@gmail.com',
-  to: `${project.email}`,
-  subject: `Updates about ${project.title}`,
-  text: `${project.updates}`
-}, (error, response) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(`Message sent`);
-  }
-});
-
-
-
-
+    // transporter.sendMail({
+    //     from: 'project.manager.helper@gmail.com',
+    //     to: `${project.email}`,
+    //     subject: `Updates about ${project.title}`,
+    //     text: `${project.updates}`
+    //     }, (error, response) => {
+    //     if (error) {
+    //     console.log(error);
+    //     } else {
+    //     console.log(`Message sent`);
+    //     }
+    //     });
+              
         body = {
         response_type: "in_channel",
         "attachments": [
           {
-            "text": `Updated ${title}`     
+            "text": `Updated ${title} ${project}`     
           }
         ]
       };
