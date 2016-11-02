@@ -110,8 +110,9 @@ app.post('/slack-slash/get-employee', function(req, res){
 
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
-      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, 
-        function(){  
+      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
+        function(project){  
+
 
               transporter.sendMail({
   from: 'project.manager.helper@gmail.com',
@@ -129,8 +130,7 @@ app.post('/slack-slash/update-project', function(req, res){
 
 
 
-
-          var body = {
+        body = {
         response_type: "in_channel",
         "attachments": [
           {
