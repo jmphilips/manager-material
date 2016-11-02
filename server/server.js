@@ -55,7 +55,7 @@ app.post('/slack-slash/get-project', function(req, res){
         .then(project => {
 
         let newString = "";
-        project.updates.forEach(update => {newString += `${update.timeStamp}: ${update.message}\n`})
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message}\n`})
 
             var body = {
                 response_type: "in_channel",
@@ -81,8 +81,6 @@ app.post('/slack-slash/get-employee', function(req, res){
         .then(employee => {
             Project.find()
                 .then(projects => {
-
-                   
 
                     // This is the message that is sent back to slack. 
                     let body = {
@@ -110,7 +108,6 @@ app.post('/slack-slash/update-project', function(req, res){
 
             let newString = ""
             project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message} \n \n`})
-
 
         // Sends an email with all of the updates
             transporter.sendMail({
