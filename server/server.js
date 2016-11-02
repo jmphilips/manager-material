@@ -130,8 +130,8 @@ app.post('/slack-slash/update-project', function(req, res){
         response_type: "in_channel",
         "attachments": [
           {
-            "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
-                    "Projects: " + projectFiltered      
+            "text": "Updated"
+         
           }
         ]
       };
