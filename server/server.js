@@ -6,19 +6,21 @@ const { json, urlencoded } = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+// const smtpTransport = require('nodemailer-smtp-transport');
+
+ var sendEmail = require('email-via-gmail'); 
+
+
+
+
 
 
 var Slack = require('node-slack');
 var slack = new Slack('https://hooks.slack.com/services/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');
 
-
-
-
-
-const transporter = nodemailer.createTransport(
-    smtpTransport('smtps://jmichaelphilips@gmail.com:j4381528@smtp.gmail.com')
-);
+// const transporter = nodemailer.createTransport(
+//     smtpTransport('smtps://jmichaelphilips@gmail.com:j4381528@smtp.gmail.com')
+// );
 
 // const Project = require('./models/ProjectModels.js');
 const Project = require('./models/ModelProject.js');
@@ -136,21 +138,40 @@ app.put('/api/projects/:projectId', (req, res, err) => {
         .then(project => {
             res.status(200).json(project) 
 
-       console.log(project.updates.length)
+       
         
         if(project.updates.length > 0) {
-        transporter.sendMail({
-            from: 'jmichaelphilips@gmail.com',
-            to: project.email,
-            subject: `Updates about ${project.title}`,
-            text: `${project.updates}`
-        }, (error, response) => {
-        if (error) {
-            console.log(error);
-        } else {
-        console.log(`Message sent`);
-        }
-         });
+
+
+            
+            
+       
+        sendEmail("project.manager.helper@gmail.com",
+		  "iloveakie",
+		  "TESTING EMAIL-VIA_GMAIL",
+		  "HELL YEAH !!!!! THIS IS MY MESSAGE",
+		  "joshtober@gmail.com");  
+
+
+
+
+
+
+
+
+
+        // transporter.sendMail({
+        //     from: 'jmichaelphilips@gmail.com',
+        //     to: project.email,
+        //     subject: `Updates about ${project.title}`,
+        //     text: `${project.updates}`
+        // }, (error, response) => {
+        // if (error) {
+        //     console.log(error);
+        // } else {
+        // console.log(`Message sent`);
+        // }
+        //  });
         
         }
     
