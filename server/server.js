@@ -145,9 +145,9 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
         if(project.updates.length > 0) {
             transporter.sendMail({
   from: 'project.manager.helper@gmail.com',
-  to: 'joshtober@gmail.com',
-  subject: 'Hey dad!',
-  text: "Do you love me yet?"
+  to: `${project.email}`,
+  subject: `Updates about ${project.title}`,
+  text: `${project.updates}`
 }, (error, response) => {
   if (error) {
     console.log(error);
