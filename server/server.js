@@ -60,7 +60,6 @@ app.post('/slack-slash/get-project', function(req, res){
 
     Project.findOne( {title} )
         .then(project => {
-
         let newString = "";
         project.updates.forEach(update => {newString += `${update.timeStamp}: ${update.message}\n`})
 
@@ -110,13 +109,29 @@ app.post('/slack-slash/get-employee', function(req, res){
 
 app.post('/slack-slash/update-project', function(req, res){
 
-    const projectAndUpdateArray = req.body.text.split(" | ");
+    const [title, update] = req.body.text.split(" | ");
+
+    //   Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
+    //     .then(project => {
+    //         res.status(200).json(project) 
+    //     })
+    //     .catch(err)
+
+
+
+
+
+
+
+
+
+
 
     var body = {
         response_type: "in_channel",
         "attachments": [
           {
-            "text": `${projectAndUpdateArray[0]} + ${projectAndUpdateArray[1]}`     
+            "text": `${title} + ${update}`     
           }
         ]
       };
@@ -148,7 +163,7 @@ app.put('/api/projects/:projectId', (req, res, err) => {
             res.status(200).json(project) 
         })
         .catch(err)
-}) ;
+});
 
 
 
