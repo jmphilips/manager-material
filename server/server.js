@@ -148,16 +148,9 @@ app.put('/api/projects/:projectId', (req, res, err) => {
        
         sendEmail("project.manager.helper@gmail.com",
 		  "iloveakie",
-		  "TESTING EMAIL-VIA_GMAIL",
-		  "HELL YEAH !!!!! THIS IS MY MESSAGE",
-		  "joshtober@gmail.com");  
-
-
-
-
-
-
-
+		  `Updates about ${project.title}`,
+		  `${project.updates}`,
+		  `${project.email}`);  
 
 
         // transporter.sendMail({
