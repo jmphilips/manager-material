@@ -5,20 +5,15 @@ const mongoose = require('mongoose');
 const { json, urlencoded } = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
-var moment = require('moment');
-
-
+const moment = require('moment');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
+const Slack = require('node-slack');
+const slack = new Slack('https://hooks.slack.com/services/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');
 
 const transporter = nodemailer.createTransport(
     smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
 );
-
-
-
-var Slack = require('node-slack');
-var slack = new Slack('https://hooks.slack.com/services/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');
 
 
 const Project = require('./models/ModelProject.js');
@@ -256,11 +251,12 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
         .catch(err)
 });
 
-
-
 // The Manager API  
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager); 
+
+
+
 function createManager(req, res) {
     const manager = req.body
     Manager.create(manager)
@@ -290,4 +286,3 @@ mongoose.connect(MONGODB_URL, () => {
         console.log(`Listening on Port: ${PORT}`);
     });
 });
-
