@@ -110,10 +110,10 @@ app.post('/slack-slash/get-employee', function(req, res){
 
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
-      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true})
+      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true, new: true})
       .then(project => {
 
-          console.log(project)
+        console.log(project)
 
         var body = {
             response_type: "in_channel",
