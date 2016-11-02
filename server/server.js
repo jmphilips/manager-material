@@ -71,26 +71,48 @@ app.post('/slack-slash/get-project', function(req, res){
         "attachments": [
           {
             "text": "Title: " + project.title + '\n' + 
-                    "Updates: " + newString
+                    `Updates:\n` + newString
           }
         ]
       };
-
              res.send(body);
         })   
 })
 
 
 
+app.post('/slack-slash/get-employee', function(req, res){
+  //take a message from Slack slash command
+
+    const lastName = req.body.text 
+
+    Employee.findOne( {lastName} )
+        .then(employee => {
+
+        Project.find()
+            .then(projects => {
+                let projectFiltered = projects.filter(project => {return project.employees.includes(employee._id)})
 
 
+                   var body = {
+        response_type: "in_channel",
+        "attachments": [
+          {
+            "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
+                    "Projects: " + projectFiltered      
+          }
+        ]
+      };
 
 
+                 res.send(body);
+            })
 
 
-
-
-
+ 
+            
+        })   
+})
 
 
 
@@ -161,7 +183,6 @@ function getEmployees (req, res) {
 app.post('/api/employees', createEmployee);
 function createEmployee (req, res) {
     const emp = req.body
-
     Employee.create(emp)
         .then(emp => {
           
