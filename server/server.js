@@ -14,6 +14,8 @@ const transporter = nodemailer.createTransport(
     smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
 );
 
+const lodash = require('lodash')
+
 // Mongoose Models
 const Project = require('./models/ModelProject.js');
 const Employee = require('./models/EmployeeModel.js');
@@ -81,6 +83,10 @@ app.post('/slack-slash/get-employee', function(req, res){
         .then(employee => {
             Project.find()
                 .then(projects => {
+
+
+                    let projectFiltered = projects.filter((project) => {return lodash.includes(project.employees, employee._id)})
+
 
                     // This is the message that is sent back to slack. 
                     let body = {
