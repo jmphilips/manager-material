@@ -84,6 +84,8 @@ app.post('/slack-slash/get-employee', function(req, res){
             Project.find()
                 .then(projects => {
 
+                    console.log(projects)
+                    
                     let projectFiltered = projects.filter((project) => {return _.includes(project.employees, employee._id)})
                     console.log("no filter:",projectFiltered)
 
@@ -98,7 +100,8 @@ app.post('/slack-slash/get-employee', function(req, res){
                         ]
                     };
                     res.send(body);
-                })           
+                })  
+
             })   
 });
 
