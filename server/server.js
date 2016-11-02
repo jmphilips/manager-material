@@ -10,11 +10,6 @@ const nodemailer = require('nodemailer');
 
  var sendEmail = require('email-via-gmail'); 
 
-
-
-
-
-
 var Slack = require('node-slack');
 var slack = new Slack('https://hooks.slack.com/services/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');
 
@@ -136,19 +131,21 @@ app.put('/api/projects/:projectId', (req, res, err) => {
     const projectId = req.params.projectId
     Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
         .then(project => {
+
+        if(project.updates.length > 0) {
+            sendEmail("project.manager.helper@gmail.com",
+                "iloveakie",
+                `Updates about ${project.title}`,
+                `${project.updates}`,
+                `${project.email}`);  
+            }
+
+
             res.status(200).json(project) 
 
        
         
-        if(project.updates.length > 0) {
-            
-        sendEmail("project.manager.helper@gmail.com",
-		  "iloveakie",
-		  `Updates about ${project.title}`,
-		  `${project.updates}`,
-		  `${project.email}`);  
 
-        }
     
         })
         .catch(err)
