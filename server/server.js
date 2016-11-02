@@ -109,11 +109,27 @@ app.post('/slack-slash/get-employee', function(req, res){
 
 
 app.post('/slack-slash/update-project', function(req, res){
-
     const [title, update] = req.body.text.split(" | ");
-
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, 
-        function(){    
+        function(){  
+
+              transporter.sendMail({
+  from: 'project.manager.helper@gmail.com',
+  to: `${project.email}`,
+  subject: `Updates about ${project.title}`,
+  text: `${project.updates}`
+}, (error, response) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(`Message sent`);
+  }
+});
+
+
+
+
+
           var body = {
         response_type: "in_channel",
         "attachments": [
@@ -122,10 +138,7 @@ app.post('/slack-slash/update-project', function(req, res){
           }
         ]
       };
-
       res.send(body)}
-
-
       )
 })
 
