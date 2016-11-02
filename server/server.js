@@ -10,7 +10,7 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const SlackWebhook = require('slack-webhook')
 
 
-const slack = new SlackWebhook('https://hooks.slack.com/services/your/webhook/url', {defaults: {
+const slack = new SlackWebhook('https://hooks.slack.com/services/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', {defaults: {
     username: 'Bot',
     channel: '#general',
     icon_emoji: ':robot_face:'
@@ -57,8 +57,7 @@ function getProjects (req, res) {
 
 app.post('/yesman',function(req,res) {
 
-    res.status('200')
-    slack.send("here")
+   
 });
 
 
