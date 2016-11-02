@@ -7,15 +7,12 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-const SlackWebhook = require('slack-webhook')
 
 
-const slack = new SlackWebhook('https://hooks.slack.com/services/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', {defaults: {
-    username: 'Bot',
-    channel: '#general',
-    icon_emoji: ':robot_face:'
-    }
-})
+var Slack = require('node-slack');
+var slack = new Slack('https://hooks.slack.com/services/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');
+
+
 
 
 
@@ -56,8 +53,15 @@ function getProjects (req, res) {
 
 
 app.post('/yesman',function(req,res) {
-
-   
+ 
+    var reply = slack.respond(req.body,function(hook) {
+        return {
+            text: ' ' + hook,
+            username: 'Bot'
+        };
+    });
+    res.json(reply);
+ 
 });
 
 
