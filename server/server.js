@@ -108,12 +108,16 @@ app.post('/slack-slash/update-project', function(req, res){
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true, new: true})
       .then(project => {
 
+            let newString = ""
+            project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message} \n \n`})
+
+
         // Sends an email with all of the updates
             transporter.sendMail({
                 from: 'project.manager.helper@gmail.com',
                 to: `${project.email}`,
                 subject: `Updates about ${project.title}`,
-                text: `${project.updates}`
+                text: newString
             }, (error, response) => {
                 if (error) {
                     console.log(error);
@@ -164,12 +168,16 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
     const projectId = req.params.projectId
     Project.findOne({"_id": projectId})
         .then(project => {
+
+        let newString = ""
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message} \n \n`})
+
         if(project.updates.length > 0) {
             transporter.sendMail({
                 from: 'project.manager.helper@gmail.com',
                 to: `${project.email}`,
                 subject: `Updates about ${project.title}`,
-                text: `${project.updates}`
+                text: newString
 
             }, (error, response) => {
                 if (error) {
@@ -180,7 +188,6 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
             });
         }
         res.end()
-
         })
 })
 
