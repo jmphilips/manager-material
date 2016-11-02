@@ -56,7 +56,7 @@ app.post('/yesman',function(req,res) {
  
     var reply = slack.respond(req.body,function(hook) {
         return {
-            text: JSON.stringify(hook),
+            text: 'Good point, ' + hook.user_name,
             username: 'Bot'
         };
     });
