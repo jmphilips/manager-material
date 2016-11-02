@@ -84,17 +84,15 @@ app.post('/slack-slash/get-employee', function(req, res){
             Project.find()
                 .then(projects => {
 
-
                     let projectFiltered = projects.filter((project) => {return lodash.includes(project.employees, employee._id)})
-
 
                     // This is the message that is sent back to slack. 
                     let body = {
                         response_type: "in_channel",
                          "attachments": [
                             {
-                                "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
-                                        "Projects: " + projectFiltered      
+                                "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
+                                        `Projects: ${projectFiltered}`      
                             }
                         ]
                     };
