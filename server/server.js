@@ -111,33 +111,21 @@ app.post('/slack-slash/update-project', function(req, res){
 
     const [title, update] = req.body.text.split(" | ");
 
-    //   Project.findOneAndUpdate({"_id": projectId}, projectInformation, {upsert: true})
-    //     .then(project => {
-    //         res.status(200).json(project) 
-    //     })
-    //     .catch(err)
-
-
-
-
-
-
-
-
-
-
-
-    var body = {
+      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, 
+        function(){    
+          var body = {
         response_type: "in_channel",
         "attachments": [
           {
-            "text": `${title} + ${update}`     
+            "text": `Updated ${title}`     
           }
         ]
       };
 
-      res.send(body)
+      res.send(body)}
 
+
+      )
 })
 
 
