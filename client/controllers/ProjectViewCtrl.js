@@ -29,10 +29,16 @@ app.controller('ProjectViewCtrl', function($routeParams, ProjectFactory, $scope,
                 $scope.toUpdate.message = ""
                 updatesArray = [];
                ProjectFactory.GetProject(projectId)
-    .then(project => {
-        $scope.project = project
-        project.updates.forEach(update => updatesArray.push(update))
-    })
+        .then(project => {
+            $scope.project = project
+            project.updates.forEach(update => updatesArray.push(update))
+
+
+            $http.get(`/api/send-email/${projectId}`)
+            .then(console.log("email sent"))
+
+        })
+        
           
         })
 
