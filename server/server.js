@@ -55,7 +55,7 @@ app.post('/slack-slash/get-project', function(req, res){
         .then(project => {
 
         let newString = "";
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message}\n`})
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message}\n`})
 
             var body = {
                 response_type: "in_channel",
@@ -107,7 +107,7 @@ app.post('/slack-slash/update-project', function(req, res){
       .then(project => {
 
             let newString = ""
-            project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message} \n \n`})
+            project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message} \n \n`})
 
         // Sends an email with all of the updates
             transporter.sendMail({
@@ -166,7 +166,7 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
         .then(project => {
 
         let newString = ""
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MM DD h:mm a')}: ${update.message} \n \n`})
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message} \n \n`})
 
         if(project.updates.length > 0) {
             transporter.sendMail({
