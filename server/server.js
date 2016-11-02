@@ -110,18 +110,39 @@ app.post('/slack-slash/get-employee', function(req, res){
 
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
-      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true}, 
-        function(error, project){ 
-    //     body = {
-    //     response_type: "in_channel",
-    //     "attachments": [
-    //       {
-    //         "text": `Updated ${title} ${project}`     
-    //       }
-    //     ]
-    //   };
-      res.end()}
-      )
+      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true}, {new: true})
+      .then(project => {
+
+              transporter.sendMail({
+  from: 'project.manager.helper@gmail.com',
+  to: `${project.email}`,
+  subject: `Updates about ${project.title}`,
+  text: `${project.updates}`
+}, (error, response) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(`Message sent`);
+  }
+});
+
+     var body = {
+        response_type: "in_channel",
+        "attachments": [
+          {
+            "text": "Employee: " + employee.firstName + employee.lastName + '\n' +
+                    "Projects: " + projectFiltered      
+          }
+        ]
+      };
+            res.send(body);
+
+
+
+
+
+      })
+
 })
 
 
