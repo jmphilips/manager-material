@@ -105,7 +105,7 @@ app.post('/slack-slash/get-employee', function(req, res){
 // takes a parameter seperated by a | 
 app.post('/slack-slash/update-project', function(req, res){
     const [title, update] = req.body.text.split(" | ");
-      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true})
+      Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: true, new: true})
       .then(project => {
 
         // Sends an email with all of the updates
