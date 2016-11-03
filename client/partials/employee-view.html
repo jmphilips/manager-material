@@ -9,6 +9,8 @@
         </md-button>
       </div>
     </md-toolbar>
+
+<div class="layout-padding">
 <h1>{{employee.firstName}} {{employee.lastName}}</h1>
 <h3>Skills</h3>
 <div ng-repeat="skill in employee.skills">
@@ -17,4 +19,5 @@
 <h3>Projects Working on</h3>
 <div ng-repeat="project in projects">
     <p>{{project.title}}</p>
+</div>
 </div>
