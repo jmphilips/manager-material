@@ -79,13 +79,12 @@ app.post('/slack-slash/get-project', function(req, res){
     Project.findOne( {title} )
         .then(project => {
 
-             let newArray = projects.map(proj => {return `${proj.title}\n`})
 
             var body = {
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${newArray}`                
+                        "text": `${project.title}\n ${project.company}\n ${project.description}\n Deadline is ${moment(project.end).format("MMM do")}`                
                     }
                 ]
             };
@@ -97,6 +96,8 @@ app.post('/slack-slash/get-projects', function(req, res){
   //take a message from Slack slash command
     Project.find()
         .then(projects => {
+
+
 
             var body = {
                 response_type: "in_channel",
@@ -125,7 +126,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                 .then(employee => {
                     
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
-                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`})
+                    let projectTitleArray = projectFiltered.map(proj => {return `${proj.title}\n`})
                     
                     // This is the message that is sent back to slack. 
                     let body = {
