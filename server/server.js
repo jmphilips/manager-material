@@ -97,13 +97,15 @@ app.post('/slack-slash/get-projects', function(req, res){
     Project.find()
         .then(projects => {
 
+            console.log(projects)
 
+            let projectTitleArray = projects.map(proj => {return `${proj.title}\n`})
 
             var body = {
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${project.title}\n ${project.company}\n ${project.description}\n Deadline is ${moment(project.end).format("MMM do")}`                
+                        "text": `${projectTitleArray}`                
                     }
                 ]
             };
@@ -134,7 +136,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                          "attachments": [
                             {
                                 "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: ${newArray}`      
+                                        `Projects: ${projectTitleArray}`      
                             }
                         ]
                     };
