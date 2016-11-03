@@ -105,11 +105,8 @@ app.post('/slack-slash/get-employee', function(req, res){
             Employee.findOne({ lastName })
                 .then(employee => {
                     
-                    
-
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
-                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`})
-                    console.log(newArray)
+                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`}))
                     
             
                     // This is the message that is sent back to slack. 
@@ -195,7 +192,7 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
     Project.findOne({"_id": projectId})
         .then(project => {
 
-        let newString = ""
+        let newString = `Hey, ${project.contactName}\n Here are some updates about ${project.title}:\n`
         project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message} \n \n`})
 
         if(project.updates.length > 0) {
