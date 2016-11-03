@@ -18,7 +18,7 @@
     <md-toolbar>
       <div class="md-toolbar-tools md-accent">
         <h2>
-          <span>Projects</span>
+          <span>Current Projects</span>
         </h2>
         <span flex=""></span>
         <md-button class="md-raised" ng-href="/#/create-project">
@@ -33,8 +33,8 @@
           <md-card-title-text>
             <span class="md-headline">{{date.title}}</span>
             <span class="md-subhead"><b>{{date.company}}</b></span>
-            <span class="md-subhead"><b>Deadline:</b> {{date.end | date:'medium'}}</span>
-            <span class="md-subhead"><b>Last Update:</b> {{date.updates[date.updates.length - 1].message}}</span>
+            <span class="md-subhead"><b>Deadline:</b> {{date.end | date:'MMMM dd'}}</span>
+            <span ng-if="date.updates.length > 0" class="md-subhead"><b>Last Update:</b> {{date.updates[date.updates.length - 1].message}}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
