@@ -32,8 +32,9 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{date.title}}</span>
-            <span class="md-subhead">{{date.company}}</span>
-            <span class="md-subhead">Deadline: {{date.end | date:'medium'}}</span>
+            <span class="md-subhead"><b>{{date.company}}</b></span>
+            <span class="md-subhead"><b>Deadline:</b> {{date.end | date:'medium'}}</span>
+            <span class="md-subhead"><b>Last Update:</b> {{date.updates[0].message}}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">

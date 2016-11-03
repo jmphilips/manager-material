@@ -50,6 +50,29 @@ function getProjects (req, res) {
 };
 
 // This slack post sends the project updates to slack with the /check_project #projectId command 
+app.post('/slack-slash/get-project-updates', function(req, res){
+  //take a message from Slack slash command
+    const title = req.body.text 
+    Project.findOne( {title} )
+        .then(project => {
+
+        let newString = "";
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message}\n`})
+
+            var body = {
+                response_type: "in_channel",
+                "attachments": [
+                    {
+                        "text": "Title: " + project.title + '\n' + 
+                                `Updates:\n` + newString
+                    }
+                ]
+            };
+            res.send(body);
+        })   
+})
+
+
 app.post('/slack-slash/get-project', function(req, res){
   //take a message from Slack slash command
     const title = req.body.text 
@@ -71,6 +94,11 @@ app.post('/slack-slash/get-project', function(req, res){
             res.send(body);
         })   
 })
+
+
+
+
+
 
 
 app.post('/slack-slash/get-employee', function(req, res){
