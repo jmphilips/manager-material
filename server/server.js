@@ -79,6 +79,25 @@ app.post('/slack-slash/get-project', function(req, res){
     Project.findOne( {title} )
         .then(project => {
 
+             let newArray = projects.map(proj => {return `${proj.title}\n`})
+
+            var body = {
+                response_type: "in_channel",
+                "attachments": [
+                    {
+                        "text": `${newArray}`                
+                    }
+                ]
+            };
+            res.send(body);
+        })   
+})
+
+app.post('/slack-slash/get-projects', function(req, res){
+  //take a message from Slack slash command
+    Project.find()
+        .then(projects => {
+
             var body = {
                 response_type: "in_channel",
                 "attachments": [
