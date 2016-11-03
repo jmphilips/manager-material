@@ -75,34 +75,60 @@ app.post('/slack-slash/get-project', function(req, res){
 
 //////////////////////////////////////////////////////////  FIX THIS
 // Returns the list of projects that an employee is working on on the slack command /check_employee #employee.lastName
+// app.post('/slack-slash/get-employee', function(req, res){
+//   //take a message from Slack slash command
+//     const lastName = req.body.text 
+//         Project.find()
+//         .then(projects => {
+//             Employee.findOne({ lastName })
+//                 .then(employee => {
+                    
+//                     console.log(projects)
+//                     console.log(employee._id)
+//                     let stringToSend = `${employee.firstName} is currently working on`
+//                     projects.forEach(project => {
+//                         console.log("test log:  ", _.includes(project.employees, employee._id))
+//                         if ( _.includes(project.employees, employee.id)) { stringToSend += `${project}`}
+//                     })
+
+//                     // This is the message that is sent back to slack. 
+//                     let body = {
+//                         response_type: "in_channel",
+//                          "attachments": [
+//                             {
+//                                 "text": stringToSend     
+//                             }
+//                         ]
+//                     };
+//                     res.send(body);
+//                 })  
+//             })   
+// });
+
+
+
 app.post('/slack-slash/get-employee', function(req, res){
   //take a message from Slack slash command
     const lastName = req.body.text 
+
         Project.find()
         .then(projects => {
+
             Employee.findOne({ lastName })
                 .then(employee => {
                     
                     console.log(projects)
                     console.log(employee._id)
-                    let stringToSend = ""
-                    projects.forEach(project => {
-                        console.log("test log:  ", _.includes(project.employees, employee._id))
-                        if ( _.includes(project.employees, employee.id)) { stringToSend += `${project}`}
-                    })
 
-
-
-
-
-                    
+                    let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
             
                     // This is the message that is sent back to slack. 
                     let body = {
                         response_type: "in_channel",
                          "attachments": [
                             {
-                                "text": stringToSend     
+                                "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
+                                        `Projects: ${projectFiltered}`      
                             }
                         ]
                     };
