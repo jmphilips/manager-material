@@ -90,6 +90,8 @@ app.post('/slack-slash/get-employee', function(req, res){
                     // let projectFiltered = projects.filter((project) => {return _.includes(project.employees, employee._id)})
                   
                     let projectFiltered = projects.filter((project) => {
+                        console.log("project emps:", project.employees);
+                        console.log("employee", employee._id)
        console.log("here it is:", _.includes(project.employees, employee._id));
        return true;
      })
