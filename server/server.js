@@ -79,11 +79,13 @@ app.post('/slack-slash/get-project', function(req, res){
     Project.findOne( {title} )
         .then(project => {
 
+            
+
             var body = {
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${project.title}\n ${project.company}\n ${project.description}\n ${moment(project.end).fromNow(g)}`                
+                        "text": `${project.title}\n ${project.company}\n ${project.description}\n ${moment(project.end).fromNow()}`                
                     }
                 ]
             };
