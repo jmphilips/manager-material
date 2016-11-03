@@ -3,19 +3,17 @@
 </md-toolbar>
 <div layout="column" layout-padding="" ng-cloak="" class="inputdemoIcons">
 
-    <md-input-container class="md-block">
-      <input ng-model="email" type="email" placeholder="Email (required)" ng-required="true">
-    </md-input-container>
+<h2 class="md-toolbar-tools">Manager Material</h2>
 
-    <md-content class="md-no-momentum">
-    <md-input-container class="md-icon-float md-block">
-      <!-- Use floating label instead of placeholder -->
-      <label>Password</label>
-      <input ng-model="password" type="text">
-    </md-input-container>
-
-    <md-button class="md-raised" ng-click="loginPressed()">Login</md-button>
-  </md-content>
+<p><b>Manager Material</b> is an app that allows a manager to manage different projects on a team.</p>
+<p><b>When</b> a manager goes to the home page, the manager can see an overview of current projects, employees, and a calendar displaying all of the projects.</p>
+<p>Manager Material incorporates custom slack integrations for employees to interface with the app.</p>
 
 </div>
-
+<md-toolbar>
+    <div class="md-toolbar-tools">  
+      <md-button class="md-raised" ng-href="/#/main">
+        Enter Manager Material
+      </md-button>
+    </div>
+</md-toolbar>
