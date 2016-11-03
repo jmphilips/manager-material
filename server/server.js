@@ -99,7 +99,7 @@ app.post('/slack-slash/get-projects', function(req, res){
 
             console.log(projects)
             let projectTitleString = ""
-            let projectTitleArray = projects.foreEach(proj => {projectTitleString += `${proj.title}\n`})
+            projects.foreEach(proj => {projectTitleString += `${proj.title}\n`})
             
 
             var body = {
@@ -113,10 +113,6 @@ app.post('/slack-slash/get-projects', function(req, res){
             res.send(body);
         })   
 })
-
-
-
-
 
 app.post('/slack-slash/get-employee', function(req, res){
   //take a message from Slack slash command
