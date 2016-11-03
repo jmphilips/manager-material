@@ -79,15 +79,14 @@ app.post('/slack-slash/get-project', function(req, res){
     Project.findOne( {title} )
         .then(project => {
 
-        let newString = "";
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message}\n`})
+       
 
             var body = {
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": "Title: " + project.title + '\n' + 
-                                `Updates:\n` + newString
+                        "text": `${project.title}\n Deadline: ${project.description}`
+                                
                     }
                 ]
             };
