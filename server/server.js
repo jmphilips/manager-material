@@ -91,6 +91,9 @@ app.post('/slack-slash/get-employee', function(req, res){
                     let projectString = "";
 
                     projects.forEach(project => {
+                        console.log(project.employees[0] === employee.id)
+
+
                         if ( _.includes(project, employee.id)) { projectString += `${project}`}
                     })
 
