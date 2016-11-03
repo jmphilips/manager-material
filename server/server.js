@@ -88,7 +88,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                     let stringToSend = ""
                     projects.forEach(project => {
                         console.log("test log:  ", _.includes(project.employees, employee._id))
-                        if ( _.includes(project, employee.id)) { stringToSend += `${project}`}
+                        if ( _.includes(project.employees, employee.id)) { stringToSend += `${project}`}
                     })
 
 
