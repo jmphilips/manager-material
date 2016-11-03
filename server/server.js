@@ -88,7 +88,15 @@ app.post('/slack-slash/get-employee', function(req, res){
                     console.log(projects)
                     console.log(employee._id)
 
-                    let projectFiltered = projects.filter((project) => {return _.includes(project.employees, employee._id)})
+                    
+
+
+
+
+
+
+
+                    let projectFiltered = projects.filter((project) => {return _.some(project.employees, employee._id)})
             
                     // This is the message that is sent back to slack. 
                     let body = {
