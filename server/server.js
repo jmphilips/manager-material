@@ -83,15 +83,13 @@ app.post('/slack-slash/get-project', function(req, res){
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${project.title}\n ${project.description}\ng9`                
+                        "text": `${project.title}\n ${project.company}\n ${project.description}\n`                
                     }
                 ]
             };
             res.send(body);
         })   
 })
-
-
 
 
 
