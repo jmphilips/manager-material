@@ -97,9 +97,9 @@ app.post('/slack-slash/get-projects', function(req, res){
     Project.find()
         .then(projects => {
 
-            console.log(projects)
+            console.log(typeof projects)
             let projectTitleString = ""
-            projects.forEach(proj => {projectTitleString += `${proj.title}\n`})
+            projects.forEach(proj => {console.log(proj); ; projectTitleString += `${proj.title}\n`})
             
 
             var body = {
