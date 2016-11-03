@@ -56,8 +56,10 @@ app.post('/slack-slash/get-project-updates', function(req, res){
     Project.findOne( {title} )
         .then(project => {
 
+        
+
         let newString = "";
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).utcOffset(-5).format('MMM DD h:mm a')}: ${update.message}\n`})
+        project.reversegi.updates.forEach(update => {newString += `${moment(update.timeStamp).utcOffset(-5).format('MMM DD h:mm a')}: ${update.message}\n`})
 
             var body = {
                 response_type: "in_channel",
