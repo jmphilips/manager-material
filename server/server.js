@@ -78,23 +78,17 @@ app.post('/slack-slash/get-project', function(req, res){
 app.post('/slack-slash/get-employee', function(req, res){
   //take a message from Slack slash command
     const lastName = req.body.text 
-
         Project.find()
         .then(projects => {
-
             Employee.findOne({ lastName })
                 .then(employee => {
                     
                     console.log(projects)
                     console.log(employee._id)
-
-                    let projectString = "";
-
+                    let stringToSend = ""
                     projects.forEach(project => {
-                        console.log(project.employees[0] === employee.id)
-
-
-                        if ( _.includes(project, employee.id)) { projectString += `${project}`}
+                        console.log("test log:  ", _.includes(project.employees, employee._id))
+                        if ( _.includes(project, employee.id)) { stringToSend += `${project}`}
                     })
 
 
@@ -108,8 +102,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                         response_type: "in_channel",
                          "attachments": [
                             {
-                                "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: ${projectString}`      
+                                "text": stringToSend     
                             }
                         ]
                     };
