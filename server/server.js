@@ -87,7 +87,7 @@ app.post('/slack-slash/get-project', function(req, res){
                         ${project.company}\n 
                         ${project.description}\n Deadline is 
                         ${moment(project.end).fromNow()} 
-                        (${moment(projec.end).format("MMM Do")}`                
+                        ${moment(projec.end).utcOffset(8)}`                
                     }
                 ]
             };
