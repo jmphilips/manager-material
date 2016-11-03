@@ -98,14 +98,15 @@ app.post('/slack-slash/get-projects', function(req, res){
         .then(projects => {
 
             console.log(projects)
-
-            let projectTitleArray = projects.map(proj => {return `${proj.title}\n`})
+            let projectTitleString = ""
+            let projectTitleArray = projects.foreEach(proj => {projectTitleString += `${proj.title}\n`})
+            
 
             var body = {
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${projectTitleArray}`                
+                        "text": `${projectTitleString}`                
                     }
                 ]
             };
