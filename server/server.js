@@ -50,7 +50,7 @@ function getProjects (req, res) {
 };
 
 // This slack post sends the project updates to slack with the /check_project #projectId command 
-app.post('/slack-slash/get-project-updates', function(req, res){
+app.post('/slack-slash/get-project-updates', (req, res) => {
   //take a message from Slack slash command
     const title = req.body.text 
     Project.findOne( {title} )
@@ -69,11 +69,11 @@ app.post('/slack-slash/get-project-updates', function(req, res){
                 ]
             };
             res.send(body);
-        })   
-})
+        });   
+});
 
 
-app.post('/slack-slash/get-project', function(req, res){
+app.post('/slack-slash/get-project', (req, res) => {
   //take a message from Slack slash command
     const title = req.body.text 
     Project.findOne( {title} )
@@ -89,10 +89,11 @@ app.post('/slack-slash/get-project', function(req, res){
                 ]
             };
             res.send(body);
-        })   
-})
+        });   
+});
 
-app.post('/slack-slash/get-projects', function(req, res){
+
+app.post('/slack-slash/get-projects', (req, res) => {
   //take a message from Slack slash command
     Project.find()
         .then(projects => {
@@ -109,11 +110,11 @@ app.post('/slack-slash/get-projects', function(req, res){
                 ]
             };
             res.send(body);
-        })   
-})
+        });   
+});
 
-app.post('/slack-slash/get-employee', function(req, res){
-  //take a message from Slack slash command
+
+app.post('/slack-slash/get-employee', (req, res) => {
     const lastName = req.body.text 
 
         Project.find()
@@ -145,7 +146,7 @@ app.post('/slack-slash/get-employee', function(req, res){
 // Updates the project via a command in slack. 
 // Example command is /update_project 
 // takes a parameter seperated by a | 
-app.post('/slack-slash/update-project', function(req, res){
+app.post('/slack-slash/update-project', (req, res) => {
     const [title, update] = req.body.text.split(" | ");
       Project.findOneAndUpdate({"title": title}, {$push: {updates: {message: update, timeStamp: moment()}}}, {upsert: false, new: true})
       .then(project => {
@@ -183,7 +184,7 @@ app.post('/slack-slash/update-project', function(req, res){
 
 // POSTS a new project to MONGO
 app.post('/api/projects', createProject);
-function createProject (req, res) {
+const createProject = (req, res) => {
     const proj = req.body
     Project.create(proj)
         .then(proj => {
@@ -245,7 +246,7 @@ app.get('/api/projects/:projectId', (req, res, err) => {
 // The Employee API  
 // GETS all of the employees from MONGO
 app.get('/api/employees', getEmployees);
-function getEmployees (req, res) {
+const getEmployees  = (req, res) => {
     Employee.find()
         .then(employees => {
             res.status(200).json(employees);
@@ -254,7 +255,7 @@ function getEmployees (req, res) {
 
 // POSTS a new employee to MONGO.
 app.post('/api/employees', createEmployee);
-function createEmployee (req, res) {
+const createEmployee = (req, res) => {
     const emp = req.body
     Employee.create(emp)
         .then(emp => {
@@ -274,8 +275,7 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
 // Creates a new manager in MONGO
 app.post('/api/create-manager', createManager); 
 
-
-function createManager(req, res) {
+const createManager = (req, res) => {
     const manager = req.body
     Manager.create(manager)
         .then(manager => {
