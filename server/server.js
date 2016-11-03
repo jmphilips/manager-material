@@ -129,7 +129,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                          "attachments": [
                             {
                                 "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: `      
+                                        `Projects: ${projectFiltered}`      
                             }
                         ]
                     };
