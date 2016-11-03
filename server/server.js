@@ -100,9 +100,9 @@ app.post('/slack-slash/get-employee', function(req, res){
                             }
                         ]
                     };
-                    res.send(body);
+                    
                 })  
-
+                res.send(body);
             })   
 });
 
