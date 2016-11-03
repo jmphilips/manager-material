@@ -88,15 +88,17 @@ app.post('/slack-slash/get-employee', function(req, res){
                     console.log(projects)
                     console.log(employee._id)
 
+                    let projectString = "";
+
+                    projects.forEach(project = {
+                        if ( _.includes(project, employee.id) ) { projectString += `${project}`}
+                    })
+
+
+
+
+
                     
-
-
-
-
-
-
-
-                    let projectFiltered = projects.filter((project) => {return _.some(project.employees, employee._id)})
             
                     // This is the message that is sent back to slack. 
                     let body = {
@@ -104,7 +106,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                          "attachments": [
                             {
                                 "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: ${projectFiltered}`      
+                                        `Projects: ${projectString}`      
                             }
                         ]
                     };
