@@ -120,6 +120,8 @@ app.post('/slack-slash/get-employee', function(req, res){
                     
 
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
+                    let newArray = projectFiltered.map(proj => {return `{proj.title}\n`})
+                    
             
                     // This is the message that is sent back to slack. 
                     let body = {
@@ -127,7 +129,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                          "attachments": [
                             {
                                 "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: ${projectFiltered.forEach(proj => `${proj.title}\n`)}`      
+                                        `Projects: `      
                             }
                         ]
                     };
