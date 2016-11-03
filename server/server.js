@@ -210,7 +210,7 @@ app.get('/api/send-email/:projectId', (req, res, err) => {
         .then(project => {
 
         let newString = `Hey, ${project.contactName}\n Here are some updates about ${project.title}:\n`
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message} \n \n`})
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).utcOffset(-5).format('MMM DD h:mm a')}: ${update.message} \n \n`})
 
         if(project.updates.length > 0) {
             transporter.sendMail({
