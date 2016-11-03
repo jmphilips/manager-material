@@ -106,9 +106,8 @@ app.post('/slack-slash/get-employee', function(req, res){
                 .then(employee => {
                     
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
-                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`}))
+                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`})
                     
-            
                     // This is the message that is sent back to slack. 
                     let body = {
                         response_type: "in_channel",
@@ -123,6 +122,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                 })  
             })   
 });
+
 
 
 // Updates the project via a command in slack. 
