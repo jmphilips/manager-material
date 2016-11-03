@@ -57,7 +57,7 @@ app.post('/slack-slash/get-project-updates', function(req, res){
         .then(project => {
 
         let newString = "";
-        project.updates.forEach(update => {newString += `${moment(update.timeStamp).format('MMM DD h:mm a')}: ${update.message}\n`})
+        project.updates.forEach(update => {newString += `${moment(update.timeStamp).utcOffset(-5).format('MMM DD h:mm a')}: ${update.message}\n`})
 
             var body = {
                 response_type: "in_channel",
@@ -83,7 +83,7 @@ app.post('/slack-slash/get-project', function(req, res){
                 response_type: "in_channel",
                 "attachments": [
                     {
-                        "text": `${project.title}\n ${project.company}\n ${project.description}\n Deadline is ${moment(project.end).format("MMM do")}`                
+                        "text": `${project.title}\n ${project.company}\n ${project.description}\n Deadline is ${moment(project.end).utcOfseet(-6).format("MMM do")}`                
                     }
                 ]
             };
