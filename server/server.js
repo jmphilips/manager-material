@@ -120,7 +120,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                     
 
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
-                    let newArray = projectFiltered.map(proj => {return `{proj.title}\n`})
+                    let newArray = projectFiltered.map(proj => {return `${proj.title}\n`})
                     console.log(newArray)
                     
             
