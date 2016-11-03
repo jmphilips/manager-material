@@ -117,8 +117,7 @@ app.post('/slack-slash/get-employee', function(req, res){
             Employee.findOne({ lastName })
                 .then(employee => {
                     
-                    console.log(projects)
-                    console.log(employee._id)
+                    
 
                     let projectFiltered = projects.filter((project) => {return project.employees.indexOf(employee._id) > -1 })
             
@@ -128,7 +127,7 @@ app.post('/slack-slash/get-employee', function(req, res){
                          "attachments": [
                             {
                                 "text": `Employee:  ${employee.firstName} ${employee.lastName} \n` +
-                                        `Projects: ${projectFiltered}`      
+                                        `Projects: ${projectFiltered.forEach(proj => `${proj.title}\n`)}`      
                             }
                         ]
                     };
