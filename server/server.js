@@ -8,8 +8,7 @@ const RedisStore = require('connect-redis')(session);
 const moment = require('moment');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-// const Slack = require('node-slack');
-// const slack = new Slack('https://hooks.slack.com/services/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');g
+
 const transporter = nodemailer.createTransport(
     smtpTransport('smtps://project.manager.helper@gmail.com:iloveakie@smtp.gmail.com')
 );
