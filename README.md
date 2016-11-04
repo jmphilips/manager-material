@@ -16,3 +16,6 @@ employees and also to post updates about a selected project.  There are currentl
 /project_info "[project title]" => "Project Name: Project Description"
 /update_project "[project title | update]" => "Updated project title" 
 ```
+
+All of these slack integrations help not to disrupt the employee workflow, and they were made using slack's outgoing webhooks
+and the Node Package
