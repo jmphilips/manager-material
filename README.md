@@ -17,5 +17,26 @@ employees and also to post updates about a selected project.  There are currentl
 /update_project "[project title | update]" => "Updated project title" 
 ```
 
-All of these slack integrations help not to disrupt the employee workflow, and they were made using slack's outgoing webhooks
-and the Node Package
+All of these slack integrations help not to disrupt the employee workflow, and they were made using a post request and response.
+
+## Automated Email Updates
+Manager Material also uses automated emails to keep customers updated.  When an employee sends an update to a project, an email 
+is automatically sent via a package called nodemailer (https://www.npmjs.com/package/nodemailer).  The automated email feature 
+is takes the task out of updating the customer out the employees' hands by automating the process. 
+
+## Calendar View 
+Last, the web portion of the app features a calendar view of all of the projects that the company or agency is currently working 
+on.  For this feature, I used Angular UI Calendar (http://angular-ui.github.io/ui-calendar/).  This feature allows a manager to 
+quickly see how busy the manager's company is at any given time.  
+
+## Other Features Technologies Used 
+As a member of Nashville Software School's Cohort 14, I heavily studied the MEAN stack and utilized the MEAN stack in this project.
+
+* JavaScript and Node.js 
+* Heroku 
+* MongoDB 
+* Mongoose 
+* Angular 
+* Angular Material 
+* Bower 
+* NPM
