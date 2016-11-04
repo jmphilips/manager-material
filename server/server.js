@@ -245,23 +245,23 @@ app.get('/api/projects/:projectId', (req, res, err) => {
 
 // The Employee API  
 // GETS all of the employees from MONGO
-app.get('/api/employees', getEmployees);
-const getEmployees  = (req, res) => {
+app.get('/api/employees', (req, res) => {
     Employee.find()
         .then(employees => {
             res.status(200).json(employees);
         });
-};
+});
+
 
 // POSTS a new employee to MONGO.
-app.post('/api/employees', createEmployee);
-const createEmployee = (req, res) => {
+app.post('/api/employees', (req, res) => {
     const emp = req.body
     Employee.create(emp)
         .then(emp => {
             res.status(200).json(emp)
     })
-};
+});
+
 
 // Grabs the employees
 app.get('/api/employees/:employeeId', (req, res, err) => {
@@ -273,16 +273,14 @@ app.get('/api/employees/:employeeId', (req, res, err) => {
 
 // The Manager API  
 // Creates a new manager in MONGO
-app.post('/api/create-manager', createManager); 
-
-const createManager = (req, res) => {
+app.post('/api/create-manager', (req, res) => {
     const manager = req.body
     Manager.create(manager)
         .then(manager => {
             console.log(manager)
             res.status(200).json(manager);
-        });
-};
+    });
+}); 
 
 // Logs in a manager. 
 app.post('/api/login', ( { session, body: {email, password}}, res, err ) => {
