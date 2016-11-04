@@ -4,6 +4,8 @@ Manager Material is a tool that allows a manager to keep track of projects that 
 While I was able to incorporate a lot of technologies that I learned at Nashville Software School, I decided to 
 use new technologies in different features 
 
+If you want to check it out, here is a link:  http://manager-material.herokuapp.com
+
 ## Slack Integration 
 Slack and other messaging apps like it are heavily used in the technology community, and they have the ability to be 
 a great medium to improve both communication and workflow.  Manager Material uses custom /commands to check the status of projects or
@@ -40,3 +42,7 @@ As a member of Nashville Software School's Cohort 14, I heavily studied the MEAN
 * Angular Material 
 * Bower 
 * NPM
+
+
+
+http://manager-material.herokuapp.com
