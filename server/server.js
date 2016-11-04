@@ -183,14 +183,14 @@ app.post('/slack-slash/update-project', (req, res) => {
 
 
 // POSTS a new project to MONGO
-app.post('/api/projects', createProject);
-const createProject = (req, res) => {
+app.post('/api/projects', (req, res) => {
     const proj = req.body
     Project.create(proj)
         .then(proj => {
             res.status(200).json(proj);
         });
-};
+});
+
 
 // Updates the project object
 app.put('/api/projects/:projectId', (req, res, err) => {
