@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ProjectViewCtrl', function($routeParams, ProjectFactory, $scope, $http){
+app.controller('ProjectViewCtrl', function($routeParams, ProjectFactory, $scope, $http, $location){
 
     let projectId = $routeParams.projectId;
     let updatesArray = [];
@@ -11,6 +11,12 @@ app.controller('ProjectViewCtrl', function($routeParams, ProjectFactory, $scope,
         $scope.project = project
         project.updates.forEach(update => updatesArray.push(update))
     })
+
+
+    $scope.deleteProjectPressed = () => {
+        ProjectFactory.DeleteProject(projectId)
+         $location.path('/main')
+    }
 
     
 

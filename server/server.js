@@ -37,17 +37,7 @@ app.use(session({
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/project-employee';
 
-
-// The Project API 
-// GETS all of the projects from MONGO
-app.get('/api/projects', getProjects);
-function getProjects (req, res) {
-    Project.find()
-        .then(projects => {
-            res.status(200).json(projects);
-        });
-};
-
+// Slack - slash commands
 // This slack post sends the project updates to slack with the /check_project #projectId command 
 app.post('/slack-slash/get-project-updates', (req, res) => {
   //take a message from Slack slash command
@@ -69,7 +59,6 @@ app.post('/slack-slash/get-project-updates', (req, res) => {
         });   
 });
 
-
 app.post('/slack-slash/get-project', (req, res) => {
   //take a message from Slack slash command
     const title = req.body.text 
@@ -87,7 +76,6 @@ app.post('/slack-slash/get-project', (req, res) => {
             res.send(body);
         });   
 });
-
 
 app.post('/slack-slash/get-projects', (req, res) => {
   //take a message from Slack slash command
@@ -177,6 +165,16 @@ app.post('/slack-slash/update-project', (req, res) => {
       })
 })
 
+// The Project API 
+// GETS all of the projects from MONGO
+app.get('/api/projects', getProjects);
+function getProjects (req, res) {
+    Project.find()
+        .then(projects => {
+            res.status(200).json(projects);
+        });
+};
+
 
 // POSTS a new project to MONGO
 app.post('/api/projects', (req, res) => {
@@ -237,6 +235,12 @@ app.get('/api/projects/:projectId', (req, res, err) => {
         .catch(err)
 
 }) ;
+
+app.delete('/api/projects/:projectId', (req, res, err) => {
+    const projectId = req.params.projectId
+    Project.findOneAndRemove({"_id": projectId})
+    .then(res.status(200))
+})
 
 
 // The Employee API  
