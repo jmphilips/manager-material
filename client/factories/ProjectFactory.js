@@ -17,7 +17,22 @@ app.factory('ProjectFactory', function($http, $q){
         })
     };
 
+    const DeleteProject = function(params){
+        return $q(function(resolve, reject){
+            $http({
+                method: "DELETE",
+                url: `/api/projects/${params}`
+            })
+            .success(function(){
+                resolve()
+            })
+        })
+        .catch(function(error){
+            reject(error)
+        })
+    }
 
 
-    return {GetProject}
+
+    return {GetProject, DeleteProject}
 })
